@@ -1,0 +1,130 @@
+{%- comment -%}
+  Hibira Live Visitors app embed: real "N people viewing" counts and
+  "just bought" popups. Settings come from the app (app-data metafields);
+  appearance and wording from the theme editor.
+{%- endcomment -%}
+{%- assign cfg = app.metafields.hibira.config.value -%}
+{%- if cfg and cfg.key != blank -%}
+  {%- assign slug = shop.permanent_domain | remove: '.myshopify.com' | downcase -%}
+  {%- assign pro = false -%}
+  {%- if cfg.plan == 'pro' -%}{%- assign pro = true -%}{%- endif -%}
+  {%- liquid
+    if block.settings.viewing_text != blank
+      assign viewing_one = block.settings.viewing_text
+      assign viewing_other = block.settings.viewing_text
+    else
+      assign viewing_one = 'live_visitors.viewing_one' | t: n: '{count}'
+      assign viewing_other = 'live_visitors.viewing_other' | t: n: '{count}'
+    endif
+    if block.settings.bought_text != blank
+      assign bought = block.settings.bought_text
+    else
+      assign bought = 'live_visitors.bought' | t
+    endif
+  -%}
+  <script id="hibira-lv-config" type="application/json">
+    {
+      "key": {{ cfg.key | json }},
+      "host": {{ cfg.host | default: 'ws.hibira.io' | json }},
+      "tls": {% if cfg.tls == false %}false{% else %}true{% endif %},
+      "plan": {% if pro %}"pro"{% else %}"free"{% endif %},
+      "shop": {{ slug | json }},
+      "product": {% if request.page_type == 'product' and product %}{{ product.id }}{% else %}null{% endif %},
+      "min": {{ block.settings.min_viewers | default: 2 }},
+      "autoInsert": {{ block.settings.auto_insert }},
+      "popups": {% if pro and block.settings.popups %}true{% else %}false{% endif %},
+      "position": {{ block.settings.popup_position | json }},
+      "delay": {{ block.settings.popup_delay | default: 8 }},
+      "maxAgeHours": {{ block.settings.popup_max_age | default: 24 }},
+      "recent": {% if pro %}{{ app.metafields.hibira.recent.value | json | default: '[]' }}{% else %}[]{% endif %},
+      "texts": {
+        "viewing_one": {{ viewing_one | json }},
+        "viewing_other": {{ viewing_other | json }},
+        "shopping_one": {{ 'live_visitors.shopping_one' | t: n: '{count}' | json }},
+        "shopping_other": {{ 'live_visitors.shopping_other' | t: n: '{count}' | json }},
+        "bought": {{ bought | json }},
+        "close": {{ 'live_visitors.close' | t | json }},
+        "sample": {{ 'live_visitors.sample_product' | t | json }}
+      }
+    }
+  </script>
+  {%- assign s = block.settings -%}
+  <style>:root { {% render 'hibira-lv-vars', s: s %} }</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:embed.name",
+  "target": "body",
+  "javascript": "live-visitors.js",
+  "stylesheet": "live-visitors.css",
+  "settings": [
+    { "type": "header", "content": "t:embed.counter" },
+    {
+      "type": "range",
+      "id": "min_viewers",
+      "label": "t:embed.min_viewers",
+      "info": "t:embed.min_viewers_info",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "viewing_text",
+      "label": "t:embed.viewing_text",
+      "info": "t:embed.viewing_text_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_insert",
+      "label": "t:embed.auto_insert",
+      "info": "t:embed.auto_insert_info",
+      "default": true
+    },
+    { "type": "header", "content": "t:embed.popups_header", "info": "t:embed.popups_info" },
+    { "type": "checkbox", "id": "popups", "label": "t:embed.popups", "default": true },
+    {
+      "type": "text",
+      "id": "bought_text",
+      "label": "t:embed.bought_text",
+      "info": "t:embed.bought_text_info"
+    },
+    {
+      "type": "select",
+      "id": "popup_position",
+      "label": "t:embed.popup_position",
+      "options": [
+        { "value": "bottom-left", "label": "t:embed.bottom_left" },
+        { "value": "bottom-right", "label": "t:embed.bottom_right" }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "range",
+      "id": "popup_delay",
+      "label": "t:embed.popup_delay",
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "popup_max_age",
+      "label": "t:embed.popup_max_age",
+      "min": 1,
+      "max": 48,
+      "step": 1,
+      "unit": "h",
+      "default": 24
+    },
+    { "type": "header", "content": "t:embed.colors" },
+    { "type": "color", "id": "accent_color", "label": "t:embed.accent_color", "default": "#e5484d" },
+    { "type": "color", "id": "text_color", "label": "t:embed.text_color" },
+    { "type": "color", "id": "background_color", "label": "t:embed.background_color", "default": "#ffffff" }
+  ]
+}
+{% endschema %}

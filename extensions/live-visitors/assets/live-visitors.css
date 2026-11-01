@@ -1,0 +1,116 @@
+/*! Hibira Live Visitors · https://hibira.io · MIT */
+.hibira-lv-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0.75rem 0;
+  font-size: 0.875em;
+  line-height: 1.4;
+  color: var(--hibira-lv-text, inherit);
+}
+.hibira-lv-badge[hidden] {
+  display: none;
+}
+.hibira-lv-badge::before {
+  content: "";
+  flex: none;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--hibira-lv-accent, #e5484d);
+  box-shadow: 0 0 0 0 var(--hibira-lv-accent, #e5484d);
+  animation: hibira-lv-pulse 2s ease-out infinite;
+}
+@keyframes hibira-lv-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--hibira-lv-accent, #e5484d) 55%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 0.45em transparent; }
+}
+
+.hibira-lv-toasts {
+  position: fixed;
+  z-index: 2147483000;
+  bottom: 16px;
+  width: min(340px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.hibira-lv-bottom-left { left: 16px; }
+.hibira-lv-bottom-right { right: 16px; }
+.hibira-lv-toast-wrap {
+  position: relative;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.hibira-lv-toast-wrap.hibira-lv-in {
+  opacity: 1;
+  transform: none;
+}
+.hibira-lv-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 36px 10px 10px;
+  border-radius: 12px;
+  background: var(--hibira-lv-bg, #fff);
+  color: var(--hibira-lv-text, #1a1a1a);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.hibira-lv-toast:focus-visible {
+  outline: 2px solid var(--hibira-lv-accent, #e5484d);
+  outline-offset: 2px;
+}
+.hibira-lv-toast img {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.hibira-lv-toast-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.hibira-lv-toast-body strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.hibira-lv-toast-line,
+.hibira-lv-toast-time {
+  opacity: 0.72;
+}
+.hibira-lv-toast-time {
+  font-size: 12px;
+}
+.hibira-lv-toast-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--hibira-lv-text, #1a1a1a);
+  opacity: 0.6;
+  cursor: pointer;
+}
+.hibira-lv-toast-close:hover,
+.hibira-lv-toast-close:focus-visible {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hibira-lv-badge::before { animation: none; }
+  .hibira-lv-toast-wrap { transition: none; transform: none; }
+}

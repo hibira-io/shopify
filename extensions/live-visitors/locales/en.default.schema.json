@@ -1,0 +1,33 @@
+{
+  "embed": {
+    "name": "Hibira Live Visitors",
+    "counter": "Viewing now",
+    "min_viewers": "Minimum count to show",
+    "min_viewers_info": "The count includes the shopper. Below this number it stays hidden.",
+    "viewing_text": "Custom wording",
+    "viewing_text_info": "Use {count} for the number. Leave empty for the shopper's language.",
+    "auto_insert": "Show under Add to cart",
+    "auto_insert_info": "When the product page has no Viewing now block.",
+    "popups_header": "Just bought popups (Pro)",
+    "popups_info": "From real orders: product only, never customer details.",
+    "popups": "Show popups",
+    "bought_text": "Custom popup wording",
+    "bought_text_info": "Shown above the product title. Leave empty for the shopper's language.",
+    "popup_position": "Position",
+    "bottom_left": "Bottom left",
+    "bottom_right": "Bottom right",
+    "popup_delay": "First popup after",
+    "popup_max_age": "Skip orders older than",
+    "colors": "Colours",
+    "accent_color": "Dot colour",
+    "text_color": "Text colour",
+    "background_color": "Popup background"
+  },
+  "block": {
+    "name": "Viewing now",
+    "scope": "Count",
+    "scope_info": "Whole store needs Pro.",
+    "scope_product": "People viewing this product",
+    "scope_store": "People on the whole store"
+  }
+}

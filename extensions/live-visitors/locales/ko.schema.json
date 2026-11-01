@@ -1,0 +1,33 @@
+{
+  "embed": {
+    "name": "Hibira Live Visitors",
+    "counter": "보고 있는 사람",
+    "min_viewers": "표시할 최소 인원",
+    "min_viewers_info": "인원에는 방문자 본인도 포함됩니다. 이보다 적으면 숨깁니다.",
+    "viewing_text": "직접 입력한 문구",
+    "viewing_text_info": "{count} 자리에 인원이 들어갑니다. 비워 두면 방문자 언어로 표시합니다.",
+    "auto_insert": "장바구니 버튼 아래에 표시",
+    "auto_insert_info": "상품 페이지에 '보고 있는 사람' 블록이 없을 때.",
+    "popups_header": "방금 구매 팝업 (Pro)",
+    "popups_info": "실제 주문 기반: 상품만 보여 주고 고객 정보는 절대 표시하지 않습니다.",
+    "popups": "팝업 표시",
+    "bought_text": "팝업 문구 직접 입력",
+    "bought_text_info": "상품명 위에 표시됩니다. 비워 두면 방문자 언어로 표시합니다.",
+    "popup_position": "위치",
+    "bottom_left": "왼쪽 아래",
+    "bottom_right": "오른쪽 아래",
+    "popup_delay": "첫 팝업까지",
+    "popup_max_age": "이보다 오래된 주문은 건너뛰기",
+    "colors": "색상",
+    "accent_color": "점 색상",
+    "text_color": "글자 색상",
+    "background_color": "팝업 배경"
+  },
+  "block": {
+    "name": "보고 있는 사람",
+    "scope": "집계 범위",
+    "scope_info": "스토어 전체는 Pro가 필요합니다.",
+    "scope_product": "이 상품을 보는 사람",
+    "scope_store": "스토어 전체 방문자"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "live_visitors": {
+    "viewing_one": "{{ n }} person is viewing this right now",
+    "viewing_other": "{{ n }} people are viewing this right now",
+    "shopping_one": "{{ n }} person shopping now",
+    "shopping_other": "{{ n }} people shopping now",
+    "bought": "Someone just bought",
+    "close": "Close",
+    "sample_product": "Sample product"
+  }
+}

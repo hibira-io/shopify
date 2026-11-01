@@ -1,0 +1,33 @@
+{
+  "embed": {
+    "name": "Hibira Live Visitors",
+    "counter": "閲覧中の人数",
+    "min_viewers": "表示する最小人数",
+    "min_viewers_info": "人数には閲覧者本人も含まれます。この人数未満では表示しません。",
+    "viewing_text": "カスタム文言",
+    "viewing_text_info": "{count} が人数になります。空欄なら閲覧者の言語で表示します。",
+    "auto_insert": "カートに追加ボタンの下に表示",
+    "auto_insert_info": "商品ページに「閲覧中」ブロックがない場合。",
+    "popups_header": "購入ポップアップ（Pro）",
+    "popups_info": "実際の注文から。商品のみで、顧客情報は表示しません。",
+    "popups": "ポップアップを表示",
+    "bought_text": "ポップアップのカスタム文言",
+    "bought_text_info": "商品名の上に表示します。空欄なら閲覧者の言語で表示します。",
+    "popup_position": "位置",
+    "bottom_left": "左下",
+    "bottom_right": "右下",
+    "popup_delay": "最初のポップアップまで",
+    "popup_max_age": "これより古い注文は表示しない",
+    "colors": "色",
+    "accent_color": "ドットの色",
+    "text_color": "文字色",
+    "background_color": "ポップアップの背景"
+  },
+  "block": {
+    "name": "閲覧中",
+    "scope": "数える範囲",
+    "scope_info": "ストア全体は Pro が必要です。",
+    "scope_product": "この商品を見ている人",
+    "scope_store": "ストア全体の人"
+  }
+}
