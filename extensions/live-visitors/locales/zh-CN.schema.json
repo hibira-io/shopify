@@ -1,0 +1,33 @@
+{
+  "embed": {
+    "name": "Hibira Live Visitors",
+    "counter": "正在浏览人数",
+    "min_viewers": "显示的最低人数",
+    "min_viewers_info": "人数包含顾客本人。低于此人数时不显示。",
+    "viewing_text": "自定义文字",
+    "viewing_text_info": "用 {count} 代表人数。留空则按顾客语言显示。",
+    "auto_insert": "显示在加入购物车按钮下方",
+    "auto_insert_info": "商品页没有“正在浏览”区块时。",
+    "popups_header": "刚刚购买弹窗（Pro）",
+    "popups_info": "来自真实订单：只显示商品，绝不显示顾客信息。",
+    "popups": "显示弹窗",
+    "bought_text": "自定义弹窗文字",
+    "bought_text_info": "显示在商品名称上方。留空则按顾客语言显示。",
+    "popup_position": "位置",
+    "bottom_left": "左下",
+    "bottom_right": "右下",
+    "popup_delay": "第一个弹窗延迟",
+    "popup_max_age": "跳过早于此时间的订单",
+    "colors": "颜色",
+    "accent_color": "圆点颜色",
+    "text_color": "文字颜色",
+    "background_color": "弹窗背景"
+  },
+  "block": {
+    "name": "正在浏览",
+    "scope": "统计范围",
+    "scope_info": "整个店铺需要 Pro。",
+    "scope_product": "正在看此商品的人",
+    "scope_store": "整个店铺的人"
+  }
+}

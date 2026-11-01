@@ -1,0 +1,39 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx prisma generate && npx prisma validate
+      - run: npm run typecheck
+      - run: npm run lint
+      - name: storefront asset is built from storefront/live-visitors.js
+        run: npm run build:storefront && git diff --exit-code extensions/live-visitors/assets
+      - run: npx vitest run app tests/storefront/render.test.mjs
+      - run: npm run build
+
+  storefront-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      # Against the bundled mock server (the Hibira server image is private).
+      - run: npx vitest run tests/storefront/e2e.test.mjs

@@ -1,0 +1,34 @@
+# Shopify app configuration. `shopify app config link` fills in client_id
+# and application_url for your Partner app.
+client_id = ""
+name = "Hibira Live Visitors"
+application_url = "https://example.com"
+embedded = true
+
+[access_scopes]
+# read_orders: "just bought" popups (product only, never customer data).
+# read_products: the product title, link and image for a popup.
+scopes = "read_orders,read_products"
+
+[webhooks]
+api_version = "2026-10"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = ["app/uninstalled"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = ["app/scopes_update"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/orders/create"
+  topics = ["orders/create"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app_subscriptions/update"
+  topics = ["app_subscriptions/update"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/compliance"
+  compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]

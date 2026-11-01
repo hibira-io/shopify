@@ -1,0 +1,11 @@
+{
+  "live_visitors": {
+    "viewing_one": "{{ n }}人が今この商品を見ています",
+    "viewing_other": "{{ n }}人が今この商品を見ています",
+    "shopping_one": "{{ n }}人がショッピング中",
+    "shopping_other": "{{ n }}人がショッピング中",
+    "bought": "購入されました",
+    "close": "閉じる",
+    "sample_product": "サンプル商品"
+  }
+}

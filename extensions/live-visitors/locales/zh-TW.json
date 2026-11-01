@@ -1,0 +1,11 @@
+{
+  "live_visitors": {
+    "viewing_one": "目前有 {{ n }} 人正在瀏覽此商品",
+    "viewing_other": "目前有 {{ n }} 人正在瀏覽此商品",
+    "shopping_one": "{{ n }} 人正在逛商店",
+    "shopping_other": "{{ n }} 人正在逛商店",
+    "bought": "有人剛剛購買了",
+    "close": "關閉",
+    "sample_product": "範例商品"
+  }
+}

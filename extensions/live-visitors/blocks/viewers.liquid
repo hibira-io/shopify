@@ -1,0 +1,47 @@
+{%- comment -%}
+  "Viewing now" app block: place the live count anywhere in a section.
+  Needs the Hibira Live Visitors app embed turned on.
+{%- endcomment -%}
+{%- assign s = block.settings -%}
+<div
+  class="hibira-lv-badge"
+  data-hibira-viewers
+  data-scope="{{ block.settings.scope }}"
+  data-min="{{ block.settings.min_viewers }}"
+  style="{% render 'hibira-lv-vars', s: s %}"
+  {{ block.shopify_attributes }}
+  hidden
+><span data-hibira-label></span></div>
+<script>window.HibiraLiveVisitors && window.HibiraLiveVisitors.render();</script>
+
+{% schema %}
+{
+  "name": "t:block.name",
+  "target": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scope",
+      "label": "t:block.scope",
+      "info": "t:block.scope_info",
+      "options": [
+        { "value": "product", "label": "t:block.scope_product" },
+        { "value": "store", "label": "t:block.scope_store" }
+      ],
+      "default": "product"
+    },
+    {
+      "type": "range",
+      "id": "min_viewers",
+      "label": "t:embed.min_viewers",
+      "info": "t:embed.min_viewers_info",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    { "type": "color", "id": "accent_color", "label": "t:embed.accent_color" },
+    { "type": "color", "id": "text_color", "label": "t:embed.text_color" }
+  ]
+}
+{% endschema %}
