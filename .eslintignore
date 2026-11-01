@@ -3,4 +3,3 @@ build
 public/build
 */*.yml
 .shopify
-extensions/live-visitors/assets/live-visitors.js
