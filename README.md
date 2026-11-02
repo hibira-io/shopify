@@ -29,9 +29,9 @@ the shopper's storefront language. Merchants can replace the wording.
 ## How it works
 
 ```
-storefront tab ──wss──▶ Hibira ◀──HTTP API── this app ◀── Shopify webhooks
+storefront tab ──wss──▶ Hibira ◀── Hibira server (internal/shopify) ◀── Shopify webhooks
   subscribes to lv-<shop>-p-<product>      orders/create → "purchase" event
-  (+ lv-<shop> on Pro)                     channels API → admin "Live now"
+  (+ lv-<shop> on Pro)                     channel counts → admin "Live now"
 ```
 
 - **One Hibira app serves every shop.** Channels are named after the shop's
@@ -62,35 +62,38 @@ storefront tab ──wss──▶ Hibira ◀──HTTP API── this app ◀─
 | "Just bought" popups | | ✓ |
 | Store-wide "N shopping now" block | | ✓ |
 
-Billing goes through the Shopify Billing API. The price is `PRO_PRICE_USD`.
+Billing goes through the Shopify Billing API (development stores get test
+charges).
 
 ## Repository layout
 
+This repository holds what Shopify hosts: the theme app extension and the
+app's configuration. The backend (embedded admin page, billing, webhooks) is
+part of the Hibira server, [hibira-io/pusher-server](https://github.com/hibira-io/pusher-server)
+`internal/shopify` (see its `docs/shopify.md`), so there is no app server to
+run.
+
 | Path | What |
 |---|---|
-| `app/` | React Router admin app (Shopify template): routes, webhooks, billing |
-| `app/live.ts` | Channel names and the recent purchase list, shared with tests |
-| `app/hibira.server.ts` | Hibira HTTP client (publish, channel counts) |
-| `app/store.server.ts` | App-data metafields the storefront reads |
+| `shopify.app.toml` | App configuration: URLs on `hibira.io/integrations/shopify`, scopes, webhooks |
 | `extensions/live-visitors/` | Theme app extension: app embed + "Viewing now" block, locales |
 | `storefront/live-visitors.js` | Source of the storefront script; `npm run build:storefront` minifies it into the extension |
 | `tests/storefront/` | Renders the real Liquid blocks and runs them in Chromium |
 
 ## Develop
 
-Needs Node 22.12+, a [Shopify Partner](https://partners.shopify.com) account
-and a development store.
+Needs Node 22.12+ and access to the app in the Shopify Dev Dashboard.
 
 ```shell
 npm install
-cp .env.example .env      # Hibira app ID, key, secret
-npm run dev               # shopify app dev: links the app, tunnels, installs
+npm run config:link       # once: fills client_id in shopify.app.toml
+npm run dev               # theme extension preview on a development store
+npm run deploy            # pushes the configuration and the extension
 ```
 
-In the Hibira console, create one app for this Shopify app and turn on
-**Send subscriber counts** for it. For local work you can instead run a
-Hibira server on your machine and set `HIBIRA_HOST=localhost` and
-`HIBIRA_PORT=8080` (plain `ws://`).
+The Hibira side is set up once by an operator: a Hibira app with allowed
+origins `*` and **Send subscriber counts** on, and in the operations console
+(**Settings → Shopify**) the app's client ID and secret and that app's ID.
 
 Then in the store: **Online Store → Themes → Customize → App embeds →
 Hibira Live Visitors**, or press **Open app embeds** on the app's home page.
@@ -98,11 +101,11 @@ Hibira Live Visitors**, or press **Open app embeds** on the app's home page.
 ## Test
 
 ```shell
-npm test                 # unit tests and Liquid rendering
+npm test                 # Liquid rendering
 npm run test:e2e         # Chromium against a bundled mock Pusher server
 HIBIRA_E2E=localhost:8080 HIBIRA_APP_ID=… HIBIRA_APP_KEY=… HIBIRA_APP_SECRET=… \
   npm run test:e2e       # the same against a real Hibira server
-npm run typecheck && npm run lint && npm run build
+npm run lint
 npx @shopify/cli theme check --path extensions/live-visitors
 ```
 
@@ -122,16 +125,12 @@ purchase, the store-wide block, and the Japanese and Chinese wording.
 
 ## Deploy
 
-Any Node host works (`Dockerfile` included). Set the variables in
-`.env.example`, with `SHOPIFY_BILLING_TEST=false`, then `npm run deploy` to
-push the app configuration and theme extension to Shopify. Sessions use
-Prisma with SQLite by default; switch `prisma/schema.prisma` to PostgreSQL
-for more than one instance.
+`npm run deploy` releases a new app version with the configuration and the
+theme extension. The backend ships with the Hibira server's releases.
 
 ## License
 
-MIT. Scaffolded from Shopify's
-[React Router app template](https://github.com/Shopify/shopify-app-template-react-router).
+MIT.
 
 ## 中文摘要
 
@@ -139,4 +138,4 @@ Hibira Live Visitors 是 Shopify 應用程式，用 Hibira 的即時訂閱人數
 人正在瀏覽此商品」，Pro 方案再加上來自真實訂單的「有人剛剛購買了…」彈窗（只顯示商品，不含任何顧客資料）
 與全店「N 人正在逛商店」區塊。所有數字都是真實開著的分頁，不會造假。商店頁面不會呼叫本伺服器：設定放在 app
 metafield，店面腳本約 2.7 KB（gzip）、無相依套件，背景分頁 30 秒後自動斷線。Pro 每 30 天 9.99 美元、試用 7
-天，透過 Shopify Billing 收費。開發用 `npm run dev`，測試用 `npm test` 與 `npm run test:e2e`。
+天，透過 Shopify Billing 收費。後端（嵌入式管理頁、收費、webhook）已併入 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充與 app 設定，不需要另外架伺服器。部署用 `npm run deploy`，測試用 `npm test` 與 `npm run test:e2e`。
