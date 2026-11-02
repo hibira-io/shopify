@@ -1,9 +1,18 @@
-# Shopify app configuration. `shopify app config link` fills in client_id
-# and application_url for your Partner app.
+# Shopify app configuration. `shopify app config link` fills in client_id.
+# The backend is the Hibira server itself (hibira-io/pusher-server,
+# internal/shopify): the embedded admin page, its API, billing and webhooks.
 client_id = ""
 name = "Hibira Live Visitors"
-application_url = "https://example.com"
+application_url = "https://hibira.io/integrations/shopify/app"
 embedded = true
+
+[build]
+# The app has no web process of its own: `shopify app dev` and
+# `shopify app deploy` only push this configuration and the theme extension.
+include_config_on_deploy = true
+
+[auth]
+redirect_urls = ["https://hibira.io/integrations/shopify/app"]
 
 [access_scopes]
 # read_orders: "just bought" popups (product only, never customer data).
@@ -14,21 +23,21 @@ scopes = "read_orders,read_products"
 api_version = "2026-10"
 
   [[webhooks.subscriptions]]
-  uri = "/webhooks/app/uninstalled"
+  uri = "https://hibira.io/integrations/shopify/webhooks"
   topics = ["app/uninstalled"]
 
   [[webhooks.subscriptions]]
-  uri = "/webhooks/app/scopes_update"
+  uri = "https://hibira.io/integrations/shopify/webhooks"
   topics = ["app/scopes_update"]
 
   [[webhooks.subscriptions]]
-  uri = "/webhooks/orders/create"
+  uri = "https://hibira.io/integrations/shopify/webhooks"
   topics = ["orders/create"]
 
   [[webhooks.subscriptions]]
-  uri = "/webhooks/app_subscriptions/update"
+  uri = "https://hibira.io/integrations/shopify/webhooks"
   topics = ["app_subscriptions/update"]
 
   [[webhooks.subscriptions]]
-  uri = "/webhooks/compliance"
+  uri = "https://hibira.io/integrations/shopify/webhooks"
   compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
