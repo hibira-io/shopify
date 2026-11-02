@@ -91,9 +91,10 @@ npm run dev               # theme extension preview on a development store
 npm run deploy            # pushes the configuration and the extension
 ```
 
-The Hibira side is set up once by an operator: a Hibira app with allowed
-origins `*` and **Send subscriber counts** on, and in the operations console
-(**Settings → Shopify**) the app's client ID and secret and that app's ID.
+The Hibira side is set up once by an operator: in the operations console
+(**Settings → Shopify**), enter the app's client ID and secret and switch
+the integration on. That creates the shared Hibira app (allowed origins `*`,
+subscriber counts on) that every store's shoppers connect to.
 
 Then in the store: **Online Store → Themes → Customize → App embeds →
 Hibira Live Visitors**, or press **Open app embeds** on the app's home page.
