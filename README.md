@@ -34,8 +34,10 @@ storefront tab ──wss──▶ Hibira ◀── Hibira server (internal/shopi
   (+ lv-<shop> on Pro)                     channel counts → admin "Live now"
 ```
 
-- **One Hibira app serves every shop.** Channels are named after the shop's
-  myshopify subdomain: `lv-acme` (store) and `lv-acme-p-123` (product 123).
+- **Every shop gets its own Hibira app**, created the first time it opens
+  the app, with its own limits: 100 connections on Free, 1,000 on Pro.
+  Channels are named after the shop's myshopify subdomain: `lv-acme` (store)
+  and `lv-acme-p-123` (product 123).
 - **Counts are Hibira subscriber counts** (`pusher_internal:subscription_count`,
   sent at most once a second per channel), so there is no presence auth and
   no per-shopper data at all.
@@ -91,9 +93,9 @@ npm run dev               # theme extension preview on a development store
 npm run deploy            # pushes the configuration and the extension
 ```
 
-The Hibira side is set up once by an operator: a Hibira app with allowed
-origins `*` and **Send subscriber counts** on, and in the operations console
-(**Settings → Shopify**) the app's client ID and secret and that app's ID.
+The Hibira side is set up once by an operator: in the operations console
+(**Settings → Shopify**), enter the app's client ID and secret and switch
+the integration on.
 
 Then in the store: **Online Store → Themes → Customize → App embeds →
 Hibira Live Visitors**, or press **Open app embeds** on the app's home page.
@@ -138,4 +140,4 @@ Hibira Live Visitors 是 Shopify 應用程式，用 Hibira 的即時訂閱人數
 人正在瀏覽此商品」，Pro 方案再加上來自真實訂單的「有人剛剛購買了…」彈窗（只顯示商品，不含任何顧客資料）
 與全店「N 人正在逛商店」區塊。所有數字都是真實開著的分頁，不會造假。商店頁面不會呼叫本伺服器：設定放在 app
 metafield，店面腳本約 2.7 KB（gzip）、無相依套件，背景分頁 30 秒後自動斷線。Pro 每 30 天 9.99 美元、試用 7
-天，透過 Shopify Billing 收費。後端（嵌入式管理頁、收費、webhook）已併入 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充與 app 設定，不需要另外架伺服器。部署用 `npm run deploy`，測試用 `npm test` 與 `npm run test:e2e`。
+天，透過 Shopify Billing 收費。每家商店會自動有自己的 Hibira app，額度各自獨立（Free 100 連線、Pro 1,000 連線）。後端（嵌入式管理頁、收費、webhook）已併入 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充與 app 設定，不需要另外架伺服器。部署用 `npm run deploy`，測試用 `npm test` 與 `npm run test:e2e`。
