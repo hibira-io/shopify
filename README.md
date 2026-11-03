@@ -132,8 +132,8 @@ theme extension. The backend ships with the Hibira server's releases.
 
 CI does the same on every push to `main` that changes `shopify.app.toml` or
 `extensions/` (`.github/workflows/deploy.yml`, also runnable by hand). It
-needs the repo secret `SHOPIFY_CLI_PARTNERS_TOKEN`, a CLI token from the
-Shopify Dev Dashboard; without it the deploy is skipped with a warning.
+needs the repo secret `SHOPIFY_APP_AUTOMATION_TOKEN`, the app's CLI automation token
+(Dev Dashboard → the app → Settings); without it the deploy is skipped with a warning.
 
 ## License
 
@@ -145,4 +145,4 @@ Hibira Live Visitors 是 Shopify 應用程式，用 Hibira 的即時訂閱人數
 人正在瀏覽此商品」，Pro 方案再加上來自真實訂單的「有人剛剛購買了…」彈窗（只顯示商品，不含任何顧客資料）
 與全店「N 人正在逛商店」區塊。所有數字都是真實開著的分頁，不會造假。商店頁面不會呼叫本伺服器：設定放在 app
 metafield，店面腳本約 2.7 KB（gzip）、無相依套件，背景分頁 30 秒後自動斷線。Pro 每 30 天 9.99 美元、試用 7
-天，透過 Shopify Billing 收費。每家商店會自動有自己的 Hibira app，額度各自獨立（Free 100 連線、Pro 1,000 連線）。後端（嵌入式管理頁、收費、webhook）已併入 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充與 app 設定，不需要另外架伺服器。部署用 `npm run deploy`，或合併到 main 後由 CI 自動部署（需設定 `SHOPIFY_CLI_PARTNERS_TOKEN`），測試用 `npm test` 與 `npm run test:e2e`。
+天，透過 Shopify Billing 收費。每家商店會自動有自己的 Hibira app，額度各自獨立（Free 100 連線、Pro 1,000 連線）。後端（嵌入式管理頁、收費、webhook）已併入 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充與 app 設定，不需要另外架伺服器。部署用 `npm run deploy`，或合併到 main 後由 CI 自動部署（需設定 `SHOPIFY_APP_AUTOMATION_TOKEN`），測試用 `npm test` 與 `npm run test:e2e`。
