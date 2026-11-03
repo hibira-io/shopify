@@ -1,15 +1,12 @@
 # Shopify app configuration. `shopify app config link` fills in client_id.
 # The backend is the Hibira server itself (hibira-io/pusher-server,
 # internal/shopify): the embedded admin page, its API, billing and webhooks.
-client_id = ""
+client_id = "cf3f7a109f79f02cc885ccf17ed27300"
 name = "Hibira Live Visitors"
 application_url = "https://hibira.io/integrations/shopify/app"
 embedded = true
 
 [build]
-# The app has no web process of its own: `shopify app dev` and
-# `shopify app deploy` only push this configuration and the theme extension.
-include_config_on_deploy = true
 
 [auth]
 redirect_urls = ["https://hibira.io/integrations/shopify/app"]
@@ -29,10 +26,6 @@ api_version = "2026-10"
   [[webhooks.subscriptions]]
   uri = "https://hibira.io/integrations/shopify/webhooks"
   topics = ["app/scopes_update"]
-
-  [[webhooks.subscriptions]]
-  uri = "https://hibira.io/integrations/shopify/webhooks"
-  topics = ["orders/create"]
 
   [[webhooks.subscriptions]]
   uri = "https://hibira.io/integrations/shopify/webhooks"
