@@ -16,6 +16,8 @@
       assign viewing_one = 'live_visitors.viewing_one' | t: n: '{count}'
       assign viewing_other = 'live_visitors.viewing_other' | t: n: '{count}'
     endif
+    assign shopping_one = 'live_visitors.shopping_one' | t: n: '{count}'
+    assign shopping_other = 'live_visitors.shopping_other' | t: n: '{count}'
     if block.settings.bought_text != blank
       assign bought = block.settings.bought_text
     else
@@ -40,8 +42,8 @@
       "texts": {
         "viewing_one": {{ viewing_one | json }},
         "viewing_other": {{ viewing_other | json }},
-        "shopping_one": {{ 'live_visitors.shopping_one' | t: n: '{count}' | json }},
-        "shopping_other": {{ 'live_visitors.shopping_other' | t: n: '{count}' | json }},
+        "shopping_one": {{ shopping_one | json }},
+        "shopping_other": {{ shopping_other | json }},
         "bought": {{ bought | json }},
         "close": {{ 'live_visitors.close' | t | json }},
         "sample": {{ 'live_visitors.sample_product' | t | json }}
