@@ -2,6 +2,7 @@
 
 ## 0.1.0 (unreleased)
 
+- The "Minimum count to show" default is now 1, so a shopper alone on a product page sees the counter (App Store review feedback: with the old default of 2, a single reviewer saw nothing).
 - The backend moved into the Hibira server (hibira-io/pusher-server, `internal/shopify`); this repository now holds the theme extension and the app configuration only.
 
 - "N people viewing this right now" on product pages, from live subscriber counts.

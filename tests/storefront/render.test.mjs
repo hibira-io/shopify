@@ -29,6 +29,14 @@ describe("app embed", () => {
     expect(c).toMatchObject({ plan: "pro", popups: true, recent });
   });
 
+  it("a lone shopper sees the count by default", async () => {
+    const c = configOf(await productPage({ config }));
+    expect(c.min).toBe(1);
+    for (const name of ["live-visitors", "viewers"]) {
+      expect(schema(name).settings.find((s) => s.id === "min_viewers").default, name).toBe(1);
+    }
+  });
+
   it("not a product page: no product", async () => {
     const c = configOf(await productPage({ config, productId: null }));
     expect(c.product).toBeNull();

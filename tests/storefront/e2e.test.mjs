@@ -107,10 +107,10 @@ describe(`storefront against ${mock ? "the mock server" : target}`, () => {
     return { ctx, page };
   }
 
-  it("hides the count for a single viewer and shows real counts as tabs open and close", async () => {
+  it("shows a single viewer the count, and real counts as tabs open and close", async () => {
     const a = await open("/free");
     await a.page.waitForFunction(() => window.HibiraLiveVisitors?.counts.product === 1, null, { timeout: 10_000 });
-    await expect(badge(a.page).isHidden()).resolves.toBe(true);
+    await expect(badge(a.page).textContent()).resolves.toBe("1 person is viewing this right now");
 
     const b = await open("/free");
     const c = await open("/free", { viewport: { width: 390, height: 844 }, colorScheme: "dark" });
@@ -128,7 +128,7 @@ describe(`storefront against ${mock ? "the mock server" : target}`, () => {
     await expect(badge(a.page).textContent()).resolves.toBe("2 people are viewing this right now");
     await b.ctx.close();
     await a.page.waitForFunction(() => window.HibiraLiveVisitors?.counts.product === 1, null, { timeout: 10_000 });
-    await expect(badge(a.page).isHidden()).resolves.toBe(true);
+    await expect(badge(a.page).textContent()).resolves.toBe("1 person is viewing this right now");
     await a.ctx.close();
   }, 60_000);
 
