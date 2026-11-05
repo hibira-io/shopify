@@ -7,7 +7,7 @@
   class="hibira-lv-badge"
   data-hibira-viewers
   data-scope="{{ block.settings.scope }}"
-  data-min="{{ block.settings.min_viewers }}"
+  data-min="{{ block.settings.min_count }}"
   style="{% render 'hibira-lv-vars', s: s %}"
   {{ block.shopify_attributes }}
   hidden
@@ -32,7 +32,7 @@
     },
     {
       "type": "range",
-      "id": "min_viewers",
+      "id": "min_count",
       "label": "t:embed.min_viewers",
       "info": "t:embed.min_viewers_info",
       "min": 1,

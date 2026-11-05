@@ -32,7 +32,7 @@
       "plan": {% if pro %}"pro"{% else %}"free"{% endif %},
       "shop": {{ slug | json }},
       "product": {% if request.page_type == 'product' and product %}{{ product.id }}{% else %}null{% endif %},
-      "min": {{ block.settings.min_viewers | default: 1 }},
+      "min": {{ block.settings.min_count | default: 1 }},
       "autoInsert": {{ block.settings.auto_insert }},
       "popups": {% if pro and block.settings.popups %}true{% else %}false{% endif %},
       "position": {{ block.settings.popup_position | json }},
@@ -64,7 +64,7 @@
     { "type": "header", "content": "t:embed.counter" },
     {
       "type": "range",
-      "id": "min_viewers",
+      "id": "min_count",
       "label": "t:embed.min_viewers",
       "info": "t:embed.min_viewers_info",
       "min": 1,
