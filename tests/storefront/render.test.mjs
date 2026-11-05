@@ -33,7 +33,7 @@ describe("app embed", () => {
     const c = configOf(await productPage({ config }));
     expect(c.min).toBe(1);
     for (const name of ["live-visitors", "viewers"]) {
-      expect(schema(name).settings.find((s) => s.id === "min_viewers").default, name).toBe(1);
+      expect(schema(name).settings.find((s) => s.id === "min_count").default, name).toBe(1);
     }
   });
 

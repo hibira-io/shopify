@@ -71,7 +71,7 @@ describe(`storefront against ${mock ? "the mock server" : target}`, () => {
     pages["/block"] = await productPage({
       config: config("pro"),
       productId: 505,
-      block: { scope: "store", min_viewers: 1 },
+      block: { scope: "store", min_count: 1 },
     });
     http = createServer((req, res) => {
       const url = req.url.split("?")[0];
