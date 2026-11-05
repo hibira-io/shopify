@@ -66,7 +66,7 @@
       var b = all[i];
       var scope = b.getAttribute("data-scope") || "product";
       var n = scope === "store" ? counts.store : counts.product;
-      var min = Number(b.getAttribute("data-min") || cfg.min || 2);
+      var min = Number(b.getAttribute("data-min") || cfg.min || 1);
       if (scope === "store" && !pro) n = undefined;
       if (typeof n !== "number" || n < min) {
         b.hidden = true;

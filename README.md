@@ -8,8 +8,8 @@ a hosted realtime service that speaks the Pusher Channels protocol:
 
 - **"3 people are viewing this right now"** on product pages. Each number is a
   real open tab on that product; it updates within a second and hides itself
-  below the minimum the merchant sets (2 by default, which includes the
-  shopper).
+  below the minimum the merchant sets (1 by default, so a lone shopper sees
+  "1 person is viewing"; the count includes the shopper).
 - **"Someone just bought …" popups** (Pro) from real orders, live and from
   the last 48 hours. Only the product is shown: never a customer name, place
   or order detail.
