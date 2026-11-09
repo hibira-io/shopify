@@ -38,7 +38,7 @@ function config(html) {
 /** Runs the script on a page at url with the rendered head; returns what it did. */
 function run(html, { url = "https://acme.example/products/tee", cookie = "", ua = "Mozilla/5.0", now = NOW } = {}) {
   const dom = new JSDOM(
-    `<!doctype html><html><head>${html.replace(/<script src=[^>]*><\/script>/, "")}</head><body>
+    `<!doctype html><html><head>${html}</head><body>
       <form action="/cart/add" method="post"><button type="submit">Add</button></form></body></html>`,
     { url, runScripts: "outside-only", resources: new ResourceLoader({ userAgent: ua }) },
   );
