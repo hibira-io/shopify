@@ -6,6 +6,6 @@ module.exports = {
   extends: ["eslint:recommended"],
   overrides: [
     // The storefront script ships as a classic script, minified for ES2017.
-    { files: ["storefront/**/*.js"], parserOptions: { sourceType: "script" } },
+    { files: ["storefront/**/*.js", "waiting-room/storefront/**/*.js"], parserOptions: { sourceType: "script" } },
   ],
 };

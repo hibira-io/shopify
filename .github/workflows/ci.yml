@@ -20,6 +20,8 @@ jobs:
       - run: npm run lint
       - name: storefront asset is built from storefront/live-visitors.js
         run: npm run build:storefront && git diff --exit-code extensions/live-visitors/assets
+      - name: waiting-room asset is built from waiting-room/storefront/waiting-room.js
+        run: npm run build:waiting-room && git diff --exit-code waiting-room/extensions/waiting-room-embed/assets
       - run: npm test
 
   storefront-e2e:
@@ -34,3 +36,15 @@ jobs:
       - run: npm i --no-save playwright && npx playwright install --with-deps chromium
       # Against the bundled mock server (the Hibira server image is private).
       - run: npx vitest run tests/storefront/e2e.test.mjs
+
+  # Hibira Waiting Room: the checkout rule (a Rust Shopify Function).
+  waiting-room-function:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: waiting-room/extensions/checkout-pass
+    steps:
+      - uses: actions/checkout@v7
+      - run: rustup target add wasm32-unknown-unknown
+      - run: cargo test --locked
+      - run: cargo build --locked --release --target=wasm32-unknown-unknown

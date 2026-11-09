@@ -6,10 +6,11 @@
     "deploy": "shopify app deploy",
     "config:link": "shopify app config link",
     "shopify": "shopify",
-    "lint": "eslint --ext .js,.mjs --cache --cache-location ./node_modules/.cache/eslint storefront tests",
-    "test": "vitest run tests/storefront/render.test.mjs",
+    "lint": "eslint --ext .js,.mjs --cache --cache-location ./node_modules/.cache/eslint storefront tests waiting-room/storefront",
+    "test": "vitest run tests/storefront/render.test.mjs tests/waiting-room",
     "test:e2e": "vitest run tests/storefront/e2e.test.mjs",
-    "build:storefront": "esbuild storefront/live-visitors.js --minify --target=es2017 --legal-comments=inline --outfile=extensions/live-visitors/assets/live-visitors.js"
+    "build:storefront": "esbuild storefront/live-visitors.js --minify --target=es2017 --legal-comments=inline --outfile=extensions/live-visitors/assets/live-visitors.js",
+    "build:waiting-room": "esbuild waiting-room/storefront/waiting-room.js --minify --target=es2017 --legal-comments=inline --outfile=waiting-room/extensions/waiting-room-embed/assets/waiting-room.js"
   },
   "type": "module",
   "engines": {

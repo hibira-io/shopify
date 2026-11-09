@@ -1,0 +1,23 @@
+# Rust, not JavaScript: checking the pass's HMAC in a JavaScript Function took
+# about 6.5M instructions per secret (the limit is 11M).
+api_version = "2026-07"
+
+[[extensions]]
+name = "Hibira waiting room pass"
+handle = "hibira-waiting-room-pass"
+type = "function"
+description = "Blocks checkout during a drop unless the shopper came through the waiting room."
+
+  [[extensions.targeting]]
+  target = "cart.validations.generate.run"
+  input_query = "src/cart_validations_generate_run.graphql"
+  export = "cart_validations_generate_run"
+
+  [extensions.targeting.input_variables]
+  namespace = "$app:hibira-waiting-room"
+  key = "vars"
+
+  [extensions.build]
+  command = "cargo build --target=wasm32-unknown-unknown --release"
+  path = "target/wasm32-unknown-unknown/release/hibira-waiting-room-pass.wasm"
+  watch = ["src/**/*.rs"]

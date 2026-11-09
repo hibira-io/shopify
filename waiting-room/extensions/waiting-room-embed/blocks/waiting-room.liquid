@@ -1,0 +1,49 @@
+{%- comment -%}
+  Hibira Waiting Room app embed. The drop (room, window, which products)
+  comes from the app-data metafield hibira.waiting_room that the app writes;
+  the script sends shoppers without a pass to the waiting page and hands the
+  pass to checkout. Never runs in the theme editor.
+{%- endcomment -%}
+{%- assign wr = app.metafields.hibira.waiting_room.value -%}
+{%- if wr and wr.key != blank and wr.room != blank and request.design_mode == false -%}
+  {%- liquid
+    assign protect = true
+    if wr.scope == 'tagged'
+      assign protect = false
+      if request.page_type == 'product' and product
+        for t in wr.tags
+          if product.tags contains t
+            assign protect = true
+            break
+          endif
+        endfor
+      endif
+    endif
+  -%}
+  <script id="hibira-wr-config" type="application/json">
+    {
+      "key": {{ wr.key | json }},
+      "app": {{ wr.app | json }},
+      "room": {{ wr.room | json }},
+      "host": {{ wr.host | default: 'ws.hibira.io' | json }},
+      "opens": {{ wr.opens | default: 0 | json }},
+      "closes": {{ wr.closes | default: 0 | json }},
+      "since": {{ wr.since | default: 0 | json }},
+      "protect": {{ protect | json }},
+      "lang": {{ request.locale.iso_code | json }},
+      "cartUpdate": {{ routes.cart_update_url | json }},
+      "cartPass": {{ cart.attributes._hibira_wr_pass | default: '' | json }}
+    }
+  </script>
+  <script src="{{ 'waiting-room.js' | asset_url }}"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:embed.name",
+  "target": "head",
+  "settings": [
+    { "type": "paragraph", "content": "t:embed.info" }
+  ]
+}
+{% endschema %}

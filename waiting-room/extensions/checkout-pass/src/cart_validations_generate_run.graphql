@@ -1,0 +1,45 @@
+# $tags, $opens and $closes come from the validation's metafield
+# $app:hibira-waiting-room.vars, written by the Hibira server. The drop
+# window is in the shop's local time, which localTime compares against.
+query Input(
+  $tags: [String!]! = []
+  $opens: DateTimeWithoutTimezone! = "2000-01-01T00:00:00"
+  $closes: DateTimeWithoutTimezone! = "2000-01-01T00:00:00"
+) {
+  buyerJourney {
+    step
+  }
+  localization {
+    language {
+      isoCode
+    }
+  }
+  shop {
+    localTime {
+      during: dateTimeBetween(startDateTime: $opens, endDateTime: $closes)
+    }
+  }
+  cart {
+    pass: attribute(key: "_hibira_wr_pass") {
+      value
+    }
+    lines {
+      pass: attribute(key: "_hibira_wr_pass") {
+        value
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            tagged: hasAnyTag(tags: $tags)
+          }
+        }
+      }
+    }
+  }
+  validation {
+    config: metafield(namespace: "$app:hibira-waiting-room", key: "config") {
+      value
+    }
+  }
+}
