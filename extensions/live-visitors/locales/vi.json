@@ -1,0 +1,11 @@
+{
+  "live_visitors": {
+    "viewing_one": "{{ n }} người đang xem sản phẩm này",
+    "viewing_other": "{{ n }} người đang xem sản phẩm này",
+    "shopping_one": "{{ n }} người đang mua sắm",
+    "shopping_other": "{{ n }} người đang mua sắm",
+    "bought": "Vừa có người mua",
+    "close": "Đóng",
+    "sample_product": "Sản phẩm mẫu"
+  }
+}

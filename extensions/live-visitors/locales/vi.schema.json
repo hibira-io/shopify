@@ -1,0 +1,33 @@
+{
+  "embed": {
+    "name": "Hibira Live Visitors",
+    "counter": "Đang xem",
+    "min_viewers": "Số tối thiểu để hiển thị",
+    "min_viewers_info": "Số này tính cả người đang xem. Thấp hơn số này thì ẩn đi.",
+    "viewing_text": "Câu chữ tùy chỉnh",
+    "viewing_text_info": "Dùng {count} cho con số. Để trống để hiện theo ngôn ngữ của khách.",
+    "auto_insert": "Hiện dưới nút Thêm vào giỏ",
+    "auto_insert_info": "Khi trang sản phẩm không có khối Đang xem.",
+    "popups_header": "Cửa sổ vừa có người mua (Pro)",
+    "popups_info": "Từ đơn hàng thật: chỉ sản phẩm, không bao giờ có thông tin khách.",
+    "popups": "Hiện cửa sổ",
+    "bought_text": "Câu chữ cửa sổ tùy chỉnh",
+    "bought_text_info": "Hiện phía trên tên sản phẩm. Để trống để hiện theo ngôn ngữ của khách.",
+    "popup_position": "Vị trí",
+    "bottom_left": "Dưới bên trái",
+    "bottom_right": "Dưới bên phải",
+    "popup_delay": "Cửa sổ đầu tiên sau",
+    "popup_max_age": "Bỏ qua đơn hàng cũ hơn",
+    "colors": "Màu sắc",
+    "accent_color": "Màu chấm",
+    "text_color": "Màu chữ",
+    "background_color": "Nền cửa sổ"
+  },
+  "block": {
+    "name": "Đang xem",
+    "scope": "Đếm",
+    "scope_info": "Toàn cửa hàng cần gói Pro.",
+    "scope_product": "Người đang xem sản phẩm này",
+    "scope_store": "Người trên toàn cửa hàng"
+  }
+}
