@@ -1,0 +1,53 @@
+name: deploy-waiting-room
+# Releases a new version of the Hibira Waiting Room app (waiting-room/: app
+# config, theme app embed, checkout Function) when main changes it.
+# Needs the repo secret SHOPIFY_WR_APP_AUTOMATION_TOKEN: the token of a
+# Shopify service account for this app (one app per service account).
+# Without it the deploy is skipped. The client ID is in waiting-room/shopify.app.toml; the
+# variable SHOPIFY_WR_CLIENT_ID overrides it when set.
+on:
+  push:
+    branches: [main]
+    paths:
+      - waiting-room/**
+      - .github/workflows/deploy-waiting-room.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shopify-deploy-waiting-room
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: waiting-room
+    env:
+      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_WR_APP_AUTOMATION_TOKEN }}
+      CLIENT_ID: ${{ vars.SHOPIFY_WR_CLIENT_ID }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: not set up yet
+        if: env.SHOPIFY_APP_AUTOMATION_TOKEN == ''
+        run: echo "::warning::SHOPIFY_WR_APP_AUTOMATION_TOKEN is not set; skipped the waiting room deploy."
+      - uses: actions/setup-node@v7
+        if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: waiting-room/package-lock.json
+      - name: rust wasm target
+        if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
+        run: rustup target add wasm32-unknown-unknown
+      - name: set client_id
+        if: env.SHOPIFY_APP_AUTOMATION_TOKEN != '' && env.CLIENT_ID != ''
+        run: sed -i "s/^client_id = .*/client_id = \"${CLIENT_ID}\"/" shopify.app.toml
+      - run: npm ci
+        if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
+      - name: shopify app deploy
+        if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
+        run: npx shopify app deploy --allow-updates --message "${GITHUB_SHA::7}"

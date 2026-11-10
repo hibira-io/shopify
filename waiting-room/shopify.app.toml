@@ -1,0 +1,29 @@
+# Hibira Waiting Room: a separate Shopify app from Hibira Live Visitors (the
+# repo root). Run the Shopify CLI from this folder. `shopify app config link`
+# keeps client_id in sync; CI may override it with the SHOPIFY_WR_CLIENT_ID variable.
+# The backend is the Hibira server (hibira-io/pusher-server, internal/shopify).
+client_id = "034bad3ee6d7c4fe6af4feb22b156df7"
+name = "Hibira Waiting Room"
+application_url = "https://hibira.io/integrations/shopify/waiting-room/app"
+embedded = true
+
+[build]
+
+[auth]
+redirect_urls = ["https://hibira.io/integrations/shopify/waiting-room/app"]
+
+[access_scopes]
+# write_validations: turn the checkout rule (the pass check) on and off and
+# give it the room's settings. Nothing else: no orders, customers or products.
+scopes = "write_validations"
+
+[webhooks]
+api_version = "2026-10"
+
+  [[webhooks.subscriptions]]
+  uri = "https://api.hibira.io/integrations/shopify/waiting-room/webhooks"
+  topics = ["app/uninstalled", "app/scopes_update", "app_subscriptions/update"]
+
+  [[webhooks.subscriptions]]
+  uri = "https://api.hibira.io/integrations/shopify/waiting-room/webhooks"
+  compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
