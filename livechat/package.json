@@ -1,0 +1,22 @@
+{
+  "name": "hibira-live-chat-shopify",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shopify app: live chat for your store, answered from the Hibira Live Chat inbox. Powered by Hibira.",
+  "scripts": {
+    "dev": "shopify app dev",
+    "deploy": "shopify app deploy",
+    "config:link": "shopify app config link",
+    "shopify": "shopify"
+  },
+  "workspaces": {
+    "packages": [
+      "extensions/*"
+    ]
+  },
+  "devDependencies": {
+    "@shopify/cli": "^5.0.0"
+  },
+  "license": "MIT"
+}

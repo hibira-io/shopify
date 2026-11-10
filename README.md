@@ -81,6 +81,8 @@ run.
 | `extensions/live-visitors/` | Theme app extension: app embed + "Viewing now" block, locales |
 | `storefront/live-visitors.js` | Source of the storefront script; `npm run build:storefront` minifies it into the extension |
 | `tests/storefront/` | Renders the real Liquid blocks and runs them in Chromium |
+| `waiting-room/` | A separate app, Hibira Waiting Room (see its README) |
+| `livechat/` | A separate app, Hibira Live Chat: the chat button's app embed (see its README) |
 
 ## Develop
 

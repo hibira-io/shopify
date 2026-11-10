@@ -1,5 +1,9 @@
 # Changelog
 
+## Hibira Live Chat 0.1.0 (unreleased, `livechat/`)
+
+- New separate app: a theme app embed puts the Hibira Live Chat button on the storefront; the admin page opens the store's inbox on chat.hibira.io with the staff member's Shopify account, shows whether the embed is on and the month's usage, and sells Live Chat's plans (Starter $29, Team $79, Business $199) through Shopify Billing.
+
 ## Hibira Waiting Room 0.1.0 (unreleased, `waiting-room/`)
 
 - New separate app: a theme app embed sends shoppers to the Hibira waiting page during a drop and hands their pass to checkout; a Rust cart and checkout validation Function blocks checkout without a valid pass. Works on every plan except Starter when installed from the App Store.
