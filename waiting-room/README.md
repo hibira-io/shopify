@@ -85,17 +85,13 @@ linked.
 
 CI deploys on every push to `main` that touches `waiting-room/`
 (`.github/workflows/deploy-waiting-room.yml`, also runnable by hand). It needs
-two repo settings from the app's Dev Dashboard page (Settings):
-
-- variable `SHOPIFY_WR_CLIENT_ID`: the client ID (written into
-  `shopify.app.toml` at deploy time, so the file can stay empty);
-- secret `SHOPIFY_WR_APP_AUTOMATION_TOKEN`: the CLI automation token.
-
-Without both, the job only warns.
+the repo secret `SHOPIFY_WR_APP_AUTOMATION_TOKEN`, the app's CLI automation
+token (Dev Dashboard, the app's Settings); without it the job only warns. The
+client ID is in `shopify.app.toml`.
 
 ## 中文摘要
 
 給 Shopify 商店用的排隊等候室，非 Plus 方案也能用（Starter 除外），但必須從 App Store 安裝（自訂 app 的 Function 只有 Plus 能用）。
 主題 app embed 在開賣期間把沒有 pass 的顧客導到 Hibira 等候頁，輪到後帶 pass 回來，寫進購物車屬性與商品表單；結帳時用 Rust 寫的
 cart validation Function 驗 pass 的 HMAC 簽名，沒有就擋下。Function 沒有時鐘，所以用開賣時段與「本次開賣後簽發」來限制 pass。
-部署由 CI 自動做（push 到 main 且改到 `waiting-room/`）：需要 repo 變數 `SHOPIFY_WR_CLIENT_ID` 與 secret `SHOPIFY_WR_APP_AUTOMATION_TOKEN`。
+部署由 CI 自動做（push 到 main 且改到 `waiting-room/`）：需要 repo secret `SHOPIFY_WR_APP_AUTOMATION_TOKEN`。
