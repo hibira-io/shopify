@@ -1,0 +1,56 @@
+name: deploy-live-chat
+# Releases a new version of the Hibira Live Chat app (livechat/: app config
+# and theme app embed) when main changes it.
+# Needs the repo secret SHOPIFY_LC_APP_AUTOMATION_TOKEN: the token of a
+# Shopify service account for this app (one app per service account), and
+# the app's client ID, in livechat/shopify.app.toml or the repo variable
+# SHOPIFY_LC_CLIENT_ID. Without them the deploy is skipped.
+on:
+  push:
+    branches: [main]
+    paths:
+      - livechat/**
+      - .github/workflows/deploy-live-chat.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shopify-deploy-live-chat
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: livechat
+    env:
+      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_LC_APP_AUTOMATION_TOKEN }}
+      CLIENT_ID: ${{ vars.SHOPIFY_LC_CLIENT_ID }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: set client_id
+        if: env.CLIENT_ID != ''
+        run: sed -i "s/^client_id = .*/client_id = \"${CLIENT_ID}\"/" shopify.app.toml
+      - name: check setup
+        id: setup
+        run: |
+          if [ -z "$SHOPIFY_APP_AUTOMATION_TOKEN" ] || grep -q '^client_id = ""' shopify.app.toml; then
+            echo "::warning::SHOPIFY_LC_APP_AUTOMATION_TOKEN or the client ID is not set; skipped the live chat deploy."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v7
+        if: steps.setup.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: livechat/package-lock.json
+      - run: npm ci
+        if: steps.setup.outputs.ready == 'true'
+      - name: shopify app deploy
+        if: steps.setup.outputs.ready == 'true'
+        run: npx shopify app deploy --allow-updates --message "${GITHUB_SHA::7}"

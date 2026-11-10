@@ -1,0 +1,32 @@
+# Hibira Live Chat: a separate Shopify app from Hibira Live Visitors (the
+# repo root) and Hibira Waiting Room (waiting-room/). Run the Shopify CLI from
+# this folder. `shopify app config link` fills client_id; until then CI takes
+# it from the SHOPIFY_LC_CLIENT_ID variable.
+# The backend is the Hibira server (hibira-io/pusher-server, internal/shopify
+# NewLiveChat) and Hibira Live Chat (chat.hibira.io, internal/livechat).
+client_id = ""
+name = "Hibira Live Chat"
+application_url = "https://hibira.io/integrations/shopify/live-chat/app"
+embedded = true
+
+[build]
+
+[auth]
+redirect_urls = ["https://hibira.io/integrations/shopify/live-chat/app"]
+
+[access_scopes]
+# read_themes: tell the merchant whether the chat button's app embed is on in
+# the live theme. Nothing else: no orders, customers or products. The chat
+# widget's settings are an app-data metafield, which needs no scope.
+scopes = "read_themes"
+
+[webhooks]
+api_version = "2026-10"
+
+  [[webhooks.subscriptions]]
+  uri = "https://api.hibira.io/integrations/shopify/live-chat/webhooks"
+  topics = ["app/uninstalled", "app_subscriptions/update"]
+
+  [[webhooks.subscriptions]]
+  uri = "https://api.hibira.io/integrations/shopify/live-chat/webhooks"
+  compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]

@@ -1,0 +1,33 @@
+{%- comment -%}
+  Hibira Live Chat app embed: the chat button and panel. The workspace and
+  the widget's address come from the app-data metafield hibira.live_chat
+  that the app writes when the merchant opens it. The widget connects only
+  when a shopper opens the chat.
+{%- endcomment -%}
+{%- assign lc = app.metafields.hibira.live_chat.value -%}
+{%- if lc and lc.workspace != blank and lc.src != blank -%}
+  {%- liquid
+    assign src = lc.src
+    unless src contains 'https://chat.hibira.io/'
+      assign src = 'https://chat.hibira.io/w/v1.js'
+    endunless
+  -%}
+  <script
+    src="{{ src | escape }}"
+    data-workspace="{{ lc.workspace | escape }}"
+    data-lang="{{ request.locale.iso_code | escape }}"
+    {%- if block.settings.color != blank %} data-color="{{ block.settings.color | escape }}"{% endif %}
+    async
+  ></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:embed.name",
+  "target": "body",
+  "settings": [
+    { "type": "color", "id": "color", "label": "t:embed.color", "default": "#4f46e5" },
+    { "type": "paragraph", "content": "t:embed.info" }
+  ]
+}
+{% endschema %}
