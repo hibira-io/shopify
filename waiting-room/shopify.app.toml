@@ -1,6 +1,6 @@
 # Hibira Waiting Room: a separate Shopify app from Hibira Live Visitors (the
 # repo root). Run the Shopify CLI from this folder. `shopify app config link`
-# fills in client_id once the app exists in the Dev Dashboard.
+# fills in client_id locally; CI writes it from the SHOPIFY_WR_CLIENT_ID variable.
 # The backend is the Hibira server (hibira-io/pusher-server, internal/shopify).
 client_id = ""
 name = "Hibira Waiting Room"
