@@ -132,7 +132,7 @@ theme extension. The backend ships with the Hibira server's releases.
 
 CI does the same on every push to `main` that changes `shopify.app.toml` or
 `extensions/` (`.github/workflows/deploy.yml`, also runnable by hand). It
-needs the repo secret `SHOPIFY_LV_APP_AUTOMATION_TOKEN` (older name `SHOPIFY_APP_AUTOMATION_TOKEN` still works), the app's CLI automation token
+needs the repo secret `SHOPIFY_LV_APP_AUTOMATION_TOKEN`, the app's CLI automation token
 (Dev Dashboard → the app → Settings); without it the deploy is skipped with a warning.
 
 ## License

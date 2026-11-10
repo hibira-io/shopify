@@ -1,8 +1,7 @@
 name: deploy
 # Releases a new app version (app config, webhooks, theme extension) when
 # main changes what Shopify serves. Needs the repo secret
-# SHOPIFY_LV_APP_AUTOMATION_TOKEN (the Live Visitors service account's CLI automation
-# token; the older name SHOPIFY_APP_AUTOMATION_TOKEN still works);
+# SHOPIFY_LV_APP_AUTOMATION_TOKEN (the Live Visitors service account's CLI automation token);
 # without it the deploy step is skipped.
 on:
   push:
@@ -23,7 +22,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_LV_APP_AUTOMATION_TOKEN || secrets.SHOPIFY_APP_AUTOMATION_TOKEN }}
+      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_LV_APP_AUTOMATION_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
