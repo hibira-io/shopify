@@ -1,9 +1,10 @@
 name: deploy-waiting-room
 # Releases a new version of the Hibira Waiting Room app (waiting-room/: app
 # config, theme app embed, checkout Function) when main changes it.
-# Needs the repo secret SHOPIFY_WR_APP_AUTOMATION_TOKEN (the app's CLI
-# automation token: Dev Dashboard → app → Settings); without it the deploy
-# is skipped. The client ID is in waiting-room/shopify.app.toml; the
+# Needs a CLI automation token whose service account has access to the
+# app: SHOPIFY_WR_APP_AUTOMATION_TOKEN, or else the Live Visitors deploy's
+# SHOPIFY_APP_AUTOMATION_TOKEN (one service account can cover both apps).
+# Without either, the deploy is skipped. The client ID is in waiting-room/shopify.app.toml; the
 # variable SHOPIFY_WR_CLIENT_ID overrides it when set.
 on:
   push:
@@ -27,13 +28,13 @@ jobs:
       run:
         working-directory: waiting-room
     env:
-      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_WR_APP_AUTOMATION_TOKEN }}
+      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_WR_APP_AUTOMATION_TOKEN || secrets.SHOPIFY_APP_AUTOMATION_TOKEN }}
       CLIENT_ID: ${{ vars.SHOPIFY_WR_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v7
       - name: not set up yet
         if: env.SHOPIFY_APP_AUTOMATION_TOKEN == ''
-        run: echo "::warning::SHOPIFY_WR_APP_AUTOMATION_TOKEN is not set; skipped the waiting room deploy."
+        run: echo "::warning::no automation token is set; skipped the waiting room deploy."
       - uses: actions/setup-node@v7
         if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
         with:
