@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { JSDOM } from "jsdom";
 import { Liquid } from "liquidjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../livechat");
@@ -28,12 +29,13 @@ function render({ lc = config, color = "#e5484d", lang = "ja" } = {}) {
 }
 
 function scriptOf(html) {
-  const m = html.match(/<script([\s\S]*?)><\/script>/);
-  if (!m) return null;
-  const attrs = {};
-  for (const a of m[1].matchAll(/([\w-]+)(?:="([^"]*)")?/g))
-    attrs[a[1]] = a[2] ?? true;
-  return attrs;
+  const el = new JSDOM(
+    `<!doctype html><body>${html}</body>`,
+  ).window.document.querySelector("script");
+  if (!el) return null;
+  return Object.fromEntries(
+    [...el.attributes].map((a) => [a.name, a.value === "" ? true : a.value]),
+  );
 }
 
 describe("live chat embed", () => {
