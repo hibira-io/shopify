@@ -1,10 +1,10 @@
 # Hibira Live Chat: a separate Shopify app from Hibira Live Visitors (the
 # repo root) and Hibira Waiting Room (waiting-room/). Run the Shopify CLI from
-# this folder. `shopify app config link` fills client_id; until then CI takes
-# it from the SHOPIFY_LC_CLIENT_ID variable.
+# this folder. The SHOPIFY_LC_CLIENT_ID variable, when set, overrides client_id
+# in CI.
 # The backend is the Hibira server (hibira-io/pusher-server, internal/shopify
 # NewLiveChat) and Hibira Live Chat (chat.hibira.io, internal/livechat).
-client_id = ""
+client_id = "359c75bae209b5e88169673c2ba69622"
 name = "Hibira Live Chat"
 application_url = "https://hibira.io/integrations/shopify/live-chat/app"
 embedded = true

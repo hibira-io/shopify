@@ -82,7 +82,7 @@ describe("live chat embed", () => {
       source.match(/\{% schema %\}([\s\S]*?)\{% endschema %\}/)[1],
     );
     expect(schema.target).toBe("body");
-    for (const l of ["en.default", "ja", "zh-TW", "zh-CN", "ko"]) {
+    for (const l of ["en.default", "ja", "zh-TW", "zh-CN", "ko", "th", "vi"]) {
       const loc = JSON.parse(
         readFileSync(
           join(root, `extensions/live-chat-embed/locales/${l}.schema.json`),
