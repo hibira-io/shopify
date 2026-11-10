@@ -1,7 +1,8 @@
 name: deploy
 # Releases a new app version (app config, webhooks, theme extension) when
 # main changes what Shopify serves. Needs the repo secret
-# SHOPIFY_APP_AUTOMATION_TOKEN (the app's CLI automation token: Dev Dashboard → app → Settings);
+# SHOPIFY_LV_APP_AUTOMATION_TOKEN (the Live Visitors service account's CLI automation
+# token; the older name SHOPIFY_APP_AUTOMATION_TOKEN still works);
 # without it the deploy step is skipped.
 on:
   push:
@@ -22,7 +23,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_APP_AUTOMATION_TOKEN }}
+      SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_LV_APP_AUTOMATION_TOKEN || secrets.SHOPIFY_APP_AUTOMATION_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -35,4 +36,4 @@ jobs:
         run: npx shopify app deploy --allow-updates --message "${GITHUB_SHA::7}"
       - name: no token
         if: env.SHOPIFY_APP_AUTOMATION_TOKEN == ''
-        run: echo "::warning::SHOPIFY_APP_AUTOMATION_TOKEN is not set; skipped shopify app deploy."
+        run: echo "::warning::SHOPIFY_LV_APP_AUTOMATION_TOKEN is not set; skipped shopify app deploy."
