@@ -144,6 +144,8 @@ fn speaks_the_checkout_language_and_the_merchants_wording_wins() {
     assert!(run(Case { lang: "ZH_TW", ..Default::default() }).unwrap().contains("排隊"));
     assert!(run(Case { lang: "ZH_CN", ..Default::default() }).unwrap().contains("排队"));
     assert!(run(Case { lang: "JA", ..Default::default() }).unwrap().contains("順番"));
+    assert!(run(Case { lang: "TH", ..Default::default() }).unwrap().contains("คิว"));
+    assert!(run(Case { lang: "VI", ..Default::default() }).unwrap().contains("xếp hàng"));
     assert_eq!(run(Case { lang: "PT_BR", ..Default::default() }).as_deref(), Some(EN));
     let cfg = config(r#","message":"Queue first!""#);
     assert_eq!(run(Case { config: Some(cfg), ..Default::default() }).as_deref(), Some("Queue first!"));
