@@ -82,6 +82,8 @@ describe("live chat embed", () => {
       source.match(/\{% schema %\}([\s\S]*?)\{% endschema %\}/)[1],
     );
     expect(schema.target).toBe("body");
+    const color = schema.settings.find((x) => x.id === "color");
+    expect(color.default).toBeUndefined();
     for (const l of ["en.default", "ja", "zh-TW", "zh-CN", "ko", "th", "vi"]) {
       const loc = JSON.parse(
         readFileSync(
@@ -89,7 +91,7 @@ describe("live chat embed", () => {
           "utf8",
         ),
       );
-      expect(Object.keys(loc.embed).sort()).toEqual(["color", "info", "name"]);
+      expect(Object.keys(loc.embed).sort()).toEqual(["color", "color_info", "info", "name"]);
     }
   });
 });

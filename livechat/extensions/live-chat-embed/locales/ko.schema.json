@@ -1,7 +1,8 @@
 {
   "embed": {
     "name": "Hibira Live Chat",
-    "color": "버튼 색상",
-    "info": "고객에게 채팅 버튼을 표시합니다. Shopify 관리자에서 Hibira Live Chat 앱을 열어 받은편지함에서 답장하세요."
+    "color": "버튼 색상(선택)",
+    "info": "고객에게 채팅 버튼을 표시합니다. Shopify 관리자에서 Hibira Live Chat 앱을 열어 받은편지함에서 답장하세요.",
+    "color_info": "비워 두면 Hibira Live Chat에서 설정한 색상(설정 → 위젯 → 디자인)을 사용합니다."
   }
 }

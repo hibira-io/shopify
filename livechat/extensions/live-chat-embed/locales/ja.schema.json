@@ -1,7 +1,8 @@
 {
   "embed": {
     "name": "Hibira Live Chat",
-    "color": "ボタンの色",
-    "info": "お客様にチャットボタンを表示します。返信は受信箱から：Shopify 管理画面で Hibira Live Chat アプリを開いてください。"
+    "color": "ボタンの色（任意）",
+    "info": "お客様にチャットボタンを表示します。返信は受信箱から：Shopify 管理画面で Hibira Live Chat アプリを開いてください。",
+    "color_info": "空欄にすると Hibira Live Chat で設定した色（設定 → ウィジェット → 外観）を使います。"
   }
 }
