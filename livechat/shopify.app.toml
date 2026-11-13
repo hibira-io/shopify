@@ -16,9 +16,14 @@ redirect_urls = ["https://hibira.io/integrations/shopify/live-chat/app"]
 
 [access_scopes]
 # read_themes: tell the merchant whether the chat button's app embed is on in
-# the live theme. Nothing else: no orders, customers or products. The chat
-# widget's settings are an app-data metafield, which needs no scope.
-scopes = "read_themes"
+# the live theme. The chat widget's settings are an app-data metafield, which
+# needs no scope.
+# read_orders: the AI assistant's order lookup (pusher-server orders.go). A
+# visitor gives an order number and the email it was placed with; only an
+# order whose email matches is read. The order's email is protected customer
+# data, so the app also needs protected customer data access (Partner
+# Dashboard > API access) before this is deployed.
+scopes = "read_themes,read_orders"
 
 [webhooks]
 api_version = "2026-10"
