@@ -30,11 +30,11 @@ jobs:
       SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_WR_APP_AUTOMATION_TOKEN }}
       CLIENT_ID: ${{ vars.SHOPIFY_WR_CLIENT_ID }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: not set up yet
         if: env.SHOPIFY_APP_AUTOMATION_TOKEN == ''
         run: echo "::warning::SHOPIFY_WR_APP_AUTOMATION_TOKEN is not set; skipped the waiting room deploy."
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
         with:
           node-version: 22
