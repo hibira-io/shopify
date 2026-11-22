@@ -17,7 +17,7 @@
     "node": ">=22.12"
   },
   "devDependencies": {
-    "@shopify/cli": "^5.0.0",
+    "@shopify/cli": "^5.0.1",
     "esbuild": "^0.28.2",
     "eslint": "^8.57.1",
     "jsdom": "^26.1.0",
