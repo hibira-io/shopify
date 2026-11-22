@@ -1,10 +1,18 @@
-# Hibira Live Visitors for Shopify
+# Hibira: Chat, Visitors & Queue for Shopify
 
 [![ci](https://github.com/hibira-io/shopify/actions/workflows/ci.yml/badge.svg)](https://github.com/hibira-io/shopify/actions/workflows/ci.yml)
 
-A Shopify app that shows shoppers real social proof, counted live on
-[Hibira](https://hibira.io/?utm_source=github&utm_medium=readme&utm_campaign=plugins),
-a hosted realtime service that speaks the Pusher Channels protocol:
+One Shopify app with three parts, all on
+[Hibira](https://hibira.io/?utm_source=github&utm_medium=readme&utm_campaign=plugins):
+
+- **Live Visitors** (below): real social proof, counted live.
+- **Live Chat**: a chat button answered from the Hibira Live Chat inbox
+  ([docs/live-chat.md](docs/live-chat.md)).
+- **Waiting room**: a queue for drops, with a checkout rule so nobody skips
+  the line ([docs/waiting-room.md](docs/waiting-room.md)).
+
+Live Visitors shows shoppers real social proof, counted live on Hibira, a
+hosted realtime service that speaks the Pusher Channels protocol:
 
 - **"3 people are viewing this right now"** on product pages. Each number is a
   real open tab on that product; it updates within a second and hides itself
@@ -57,12 +65,18 @@ storefront tab ──wss──▶ Hibira ◀── Hibira server (internal/shopi
 
 ## Plans
 
-| | Free | Pro ($9.99 / 30 days, 7-day trial) |
-|---|---|---|
-| "N viewing this now" on product pages | ✓ | ✓ |
-| Live now in the admin | ✓ | ✓ |
-| "Just bought" popups | | ✓ |
-| Store-wide "N shopping now" block | | ✓ |
+One Shopify subscription covers all three parts, every 30 days. Paid plans
+start with a 7-day trial when moving up from Free.
+
+| | Free | Lite $9.99 | Starter $29 | Growth $99 | Business $249 |
+|---|---|---|---|---|---|
+| Live Visitors | Free (100 connections) | Pro (1,000) | Pro (1,000) | Pro (1,000) | Pro (3,500) |
+| Live Chat | Free | Free | Starter | Team | Business |
+| Waiting room | Free allowance | Free allowance | Free allowance | Drop | Launch |
+
+Live Visitors' Pro ("just bought" popups and the store-wide block) comes
+with every paid plan; stores on the old Pro ($9.99) are on Lite. A $49 event
+pass buys one waiting room drop on any plan.
 
 Billing goes through the Shopify Billing API (development stores get test
 charges).
@@ -79,10 +93,11 @@ run.
 |---|---|
 | `shopify.app.toml` | App configuration: URLs on `hibira.io/integrations/shopify`, scopes, webhooks |
 | `extensions/live-visitors/` | Theme app extension: app embed + "Viewing now" block, locales |
-| `storefront/live-visitors.js` | Source of the storefront script; `npm run build:storefront` minifies it into the extension |
-| `tests/storefront/` | Renders the real Liquid blocks and runs them in Chromium |
-| `waiting-room/` | A separate app, Hibira Waiting Room (see its README) |
-| `livechat/` | A separate app, Hibira Live Chat: the chat button's app embed (see its README) |
+| `extensions/live-chat-embed/` | Theme app extension: the Live Chat button's app embed |
+| `extensions/waiting-room-embed/` | Theme app extension: the waiting room's app embed |
+| `extensions/checkout-pass/` | The waiting room's checkout rule, a Rust Shopify Function |
+| `storefront/` | Sources of the storefront scripts; `npm run build:storefront` and `npm run build:waiting-room` minify them into the extensions |
+| `tests/` | Renders the real Liquid blocks and runs them (Chromium for Live Visitors) |
 
 ## Develop
 
@@ -133,7 +148,7 @@ purchase, the store-wide block, and the Japanese and Chinese wording.
 theme extension. The backend ships with the Hibira server's releases.
 
 CI does the same on every push to `main` that changes `shopify.app.toml` or
-`extensions/` (`.github/workflows/deploy.yml`, also runnable by hand). It
+`extensions/` (all three parts, including the Rust checkout Function) (`.github/workflows/deploy.yml`, also runnable by hand). It
 needs the repo secret `SHOPIFY_LV_APP_AUTOMATION_TOKEN`, the app's CLI automation token
 (Dev Dashboard → the app → Settings); without it the deploy is skipped with a warning.
 
@@ -143,8 +158,4 @@ MIT.
 
 ## 中文摘要
 
-Hibira Live Visitors 是 Shopify 應用程式，用 Hibira 的即時訂閱人數，在商品頁顯示真實的「目前有 N
-人正在瀏覽此商品」，Pro 方案再加上來自真實訂單的「有人剛剛購買了…」彈窗（只顯示商品，不含任何顧客資料）
-與全店「N 人正在逛商店」區塊。所有數字都是真實開著的分頁，不會造假。商店頁面不會呼叫本伺服器：設定放在 app
-metafield，店面腳本約 2.7 KB（gzip）、無相依套件，背景分頁 30 秒後自動斷線。Pro 每 30 天 9.99 美元、試用 7
-天，透過 Shopify Billing 收費。每家商店會自動有自己的 Hibira app，額度各自獨立（Free 100 連線、Pro 1,000 連線）。後端（嵌入式管理頁、收費、webhook）已併入 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充與 app 設定，不需要另外架伺服器。部署用 `npm run deploy`，或合併到 main 後由 CI 自動部署（需設定 `SHOPIFY_LV_APP_AUTOMATION_TOKEN`），測試用 `npm test` 與 `npm run test:e2e`。
+Hibira: Chat, Visitors & Queue 是一個 Shopify 應用程式，包含三個部分：Live Visitors（用 Hibira 的即時訂閱人數，在商品頁顯示真實的「目前有 N 人正在瀏覽此商品」，付費方案再加上來自真實訂單的「有人剛剛購買了…」彈窗與全店「N 人正在逛商店」區塊，數字都是真實開著的分頁，不會造假）、Live Chat（店面聊天按鈕，由 Hibira Live Chat 收件匣回覆）、等候室（開賣排隊，結帳時用 Rust Function 驗 pass）。一個 Shopify 訂閱涵蓋三者：Free、Lite $9.99、Starter $29、Growth $99、Business $249（每 30 天），另有 $49 單次活動票。舊的 Pro 訂閱自動算成 Lite。後端（嵌入式管理頁、收費、webhook）在 Hibira 伺服器（hibira-io/pusher-server 的 `internal/shopify`），本倉庫只放主題擴充、Function 與 app 設定。部署用 `npm run deploy`，或合併到 main 後由 CI 自動部署（需設定 `SHOPIFY_LV_APP_AUTOMATION_TOKEN`），測試用 `npm test` 與 `npm run test:e2e`。

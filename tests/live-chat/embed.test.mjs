@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { JSDOM } from "jsdom";
 import { Liquid } from "liquidjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "../../livechat");
+const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const source = readFileSync(
   join(root, "extensions/live-chat-embed/blocks/live-chat.liquid"),
   "utf8",

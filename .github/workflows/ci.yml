@@ -21,7 +21,7 @@ jobs:
       - name: storefront asset is built from storefront/live-visitors.js
         run: npm run build:storefront && git diff --exit-code extensions/live-visitors/assets
       - name: waiting-room asset is built from waiting-room/storefront/waiting-room.js
-        run: npm run build:waiting-room && git diff --exit-code waiting-room/extensions/waiting-room-embed/assets
+        run: npm run build:waiting-room && git diff --exit-code extensions/waiting-room-embed/assets
       - run: npm test
 
   storefront-e2e:
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: waiting-room/extensions/checkout-pass
+        working-directory: extensions/checkout-pass
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - run: rustup target add wasm32-unknown-unknown

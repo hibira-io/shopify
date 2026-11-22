@@ -1,8 +1,10 @@
 # Shopify app configuration. `shopify app config link` fills in client_id.
+# One app for Live Visitors, Live Chat and the waiting room (they were three
+# apps until 2026-11; this is Live Visitors' app, which kept its ID).
 # The backend is the Hibira server itself (hibira-io/pusher-server,
 # internal/shopify): the embedded admin page, its API, billing and webhooks.
 client_id = "cf3f7a109f79f02cc885ccf17ed27300"
-name = "Hibira Live Visitors"
+name = "Hibira: Chat, Visitors & Queue"
 application_url = "https://hibira.io/integrations/shopify/app"
 embedded = true
 
@@ -14,7 +16,10 @@ redirect_urls = ["https://hibira.io/integrations/shopify/app"]
 [access_scopes]
 # read_orders: "just bought" popups (product only, never customer data).
 # read_products: the product title, link and image for a popup.
-scopes = "read_orders,read_products"
+# read_themes: whether the Live Chat app embed is on in the live theme.
+# write_validations: turn the waiting room's checkout rule (the pass check)
+#   on and off and give it the room's settings.
+scopes = "read_orders,read_products,read_themes,write_validations"
 
 [webhooks]
 api_version = "2026-10"

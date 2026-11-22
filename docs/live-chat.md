@@ -6,13 +6,14 @@ inbox. Shoppers get a chat button on every storefront page; the store's staff
 reply from the inbox, with AI replies, translation and saved answers on paid
 plans.
 
-This is a separate Shopify app from Hibira Live Visitors (the repo root) and
-Hibira Waiting Room (`waiting-room/`). Run the Shopify CLI from this folder.
+This is part of the one Shopify app, Hibira: Chat, Visitors & Queue (the repo
+root): the theme app embed `extensions/live-chat-embed`. Run the Shopify CLI
+from the repo root.
 
 ## How it works
 
 ```
-Shopify admin ── Hibira Live Chat app ──► hibira.io/integrations/shopify/live-chat
+Shopify admin ── Live Chat page ────────► hibira.io/integrations/shopify/live-chat
                                            creates the store's workspace on chat.hibira.io
                                            writes app-data metafield hibira.live_chat
                  "Open inbox" (new tab) ──► chat.hibira.io/sso/jwt → /inbox
@@ -30,20 +31,21 @@ storefront page ── app embed ──► https://chat.hibira.io/w/v1.js data-w
 - **Sign-in.** The inbox opens in a new tab, signed in with the staff
   member's Shopify account (their verified email). Staff join as admins while
   the plan has a free seat; the store's contact email is the owner.
-- **Scopes.** `read_themes` only, to show whether the embed is on. No orders,
-  customers or products.
+- **Scopes.** `read_themes`, to show whether the embed is on. The Live Chat
+  menu item appears once the store has granted it.
 
 ## Plans
 
-Live Chat's own plans, charged by Shopify every 30 days on the merchant's
-Shopify bill. Same allowances as on chat.hibira.io.
+Live Chat comes with the app's plans (one Shopify subscription covers Live
+Visitors, Live Chat and the waiting room). The Live Chat page shows which
+plan includes what and links to the app's Plan page.
 
-| | Free | Starter | Team | Business |
+| App plan | Live Chat plan | Agents | Conversations / month | AI replies / month |
 |---|---|---|---|---|
-| Price | $0 | $29 | $79 | $199 |
-| Agents | 2 | 3 | 8 | 20 |
-| Conversations / month | 100 | 1,000 | 3,000 | 8,000 |
-| AI replies / month | – | 300 | 1,000 | 2,000 |
+| Free, Lite | Free | 2 | 100 | – |
+| Starter ($29) | Starter | 3 | 1,000 | 300 |
+| Growth ($99) | Team | 8 | 3,000 | 1,000 |
+| Business ($249) | Business | 20 | 8,000 | 2,000 |
 
 Past the month's conversations the widget takes messages instead of live
 chats; nobody is cut off.
@@ -58,16 +60,10 @@ Privacy).
 
 ## Set up
 
-1. Create the app "Hibira Live Chat" in the Shopify Dev Dashboard, then run
-   `npm run config:link` here (or set the repo variable
-   `SHOPIFY_LC_CLIENT_ID`).
-2. In the Hibira operations console, **Settings → Shopify Live Chat**: the
-   app's client ID and secret, switched on. Live Chat must be on
-   (`LIVECHAT_ENABLED`).
-3. A Shopify service account for this app, its token in the repo secret
-   `SHOPIFY_LC_APP_AUTOMATION_TOKEN`. Pushes to `main` that touch `livechat/`
-   then deploy it (`.github/workflows/deploy-live-chat.yml`).
+Nothing of its own: it uses the app's client ID and secret (operations
+console, **Settings → Shopify**). Live Chat must be on (`LIVECHAT_ENABLED`).
+The embed deploys with the app (`.github/workflows/deploy.yml`).
 
 ## 中文摘要
 
-「Hibira Live Chat」是獨立的第三個 Shopify app。商家打開 app 時，Hibira 伺服器會在 chat.hibira.io 自動建立該店的 Live Chat 工作區，並寫入 metafield `hibira.live_chat`；theme app embed 讀取它，在店面載入聊天按鈕。店員在 Shopify 後台按「打開收件匣」，即以自己的 Shopify 帳號登入收件匣。方案沿用 Live Chat 的 Free / Starter $29 / Team $79 / Business $199，透過 Shopify Billing 每 30 天收費。只要求 `read_themes` 權限。解除安裝時停用工作區，shop/redact 時刪除。
+Live Chat 已併入同一個 Shopify app（Hibira: Chat, Visitors & Queue）。商家打開 Live Chat 頁時，Hibira 伺服器會在 chat.hibira.io 自動建立該店的 Live Chat 工作區，並寫入 metafield `hibira.live_chat`；theme app embed 讀取它，在店面載入聊天按鈕。店員按「打開收件匣」，即以自己的 Shopify 帳號登入收件匣。方案跟隨 app 的方案：Starter 含 Live Chat Starter，Growth 含 Team，Business 含 Business。解除安裝時停用工作區，shop/redact 時刪除。
