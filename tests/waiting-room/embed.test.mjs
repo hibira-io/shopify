@@ -9,7 +9,7 @@ import { Liquid } from "liquidjs";
 
 import { NOW, claims, signPass } from "./helpers.mjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "../../waiting-room");
+const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const block = readFileSync(join(root, "extensions/waiting-room-embed/blocks/waiting-room.liquid"), "utf8").replace(
   /\{% schema %\}[\s\S]*?\{% endschema %\}/,
   "",

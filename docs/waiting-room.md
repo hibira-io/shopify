@@ -6,8 +6,10 @@ drop is on, shoppers queue on a
 waiting page and come back to the store when their turn comes. A checkout
 rule makes sure nobody skips the line by going straight to checkout.
 
-This is a separate Shopify app from Hibira Live Visitors (the repo root). Run
-the Shopify CLI from this folder.
+This is part of the one Shopify app, Hibira: Chat, Visitors & Queue (the repo
+root): the theme app embed `extensions/waiting-room-embed`, its source
+`storefront/waiting-room.js` and the checkout rule `extensions/checkout-pass`.
+Run the Shopify CLI from the repo root.
 
 ## What works without Shopify Plus
 
@@ -69,10 +71,10 @@ its myshopify domain.
 ## Develop
 
 ```bash
-npm install                              # in this folder: Shopify CLI
+npm install                              # repo root: Shopify CLI
 (cd extensions/checkout-pass && cargo test)
-npm --prefix .. run build:waiting-room   # rebuild the embed's asset
-npm --prefix .. test                     # embed tests (repo root)
+npm run build:waiting-room               # rebuild the embed's asset
+npm test                                 # embed tests
 npx shopify app function build --path extensions/checkout-pass
 npx shopify app function run --path extensions/checkout-pass --input input.json
 ```
@@ -83,16 +85,12 @@ linked.
 
 ## Deploy
 
-CI deploys on every push to `main` that touches `waiting-room/`
-(`.github/workflows/deploy-waiting-room.yml`, also runnable by hand). It needs
-the repo secret `SHOPIFY_WR_APP_AUTOMATION_TOKEN`, the token of a Shopify
-service account for this app (a service account covers one app). Without
-it, the job only warns. The
-client ID is in `shopify.app.toml`.
+Ships with the app: CI deploys on every push to `main` that touches
+`shopify.app.toml` or `extensions/` (`.github/workflows/deploy.yml`).
 
 ## 中文摘要
 
 給 Shopify 商店用的排隊等候室，非 Plus 方案也能用（Starter 除外），但必須從 App Store 安裝（自訂 app 的 Function 只有 Plus 能用）。
 主題 app embed 在開賣期間把沒有 pass 的顧客導到 Hibira 等候頁，輪到後帶 pass 回來，寫進購物車屬性與商品表單；結帳時用 Rust 寫的
 cart validation Function 驗 pass 的 HMAC 簽名，沒有就擋下。Function 沒有時鐘，所以用開賣時段與「本次開賣後簽發」來限制 pass。
-部署由 CI 自動做（push 到 main 且改到 `waiting-room/`）：需要 repo secret `SHOPIFY_WR_APP_AUTOMATION_TOKEN`（此 app 專用的 service account token）。
+等候室已併入同一個 Shopify app（Hibira: Chat, Visitors & Queue），隨 app 一起由 CI 部署（`.github/workflows/deploy.yml`）。

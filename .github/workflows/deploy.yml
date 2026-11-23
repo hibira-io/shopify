@@ -1,5 +1,6 @@
 name: deploy
-# Releases a new app version (app config, webhooks, theme extension) when
+# Releases a new app version (app config, webhooks, the theme app extensions
+# and the waiting room's checkout Function) when
 # main changes what Shopify serves. Needs the repo secret
 # SHOPIFY_LV_APP_AUTOMATION_TOKEN (the Live Visitors service account's CLI automation token);
 # without it the deploy step is skipped.
@@ -29,6 +30,8 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: rust wasm target (the checkout Function)
+        run: rustup target add wasm32-unknown-unknown
       - run: npm ci
       - name: shopify app deploy
         if: env.SHOPIFY_APP_AUTOMATION_TOKEN != ''
