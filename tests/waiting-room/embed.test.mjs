@@ -10,7 +10,7 @@ import { Liquid } from "liquidjs";
 import { NOW, claims, signPass } from "./helpers.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
-const block = readFileSync(join(root, "extensions/waiting-room-embed/blocks/waiting-room.liquid"), "utf8").replace(
+const block = readFileSync(join(root, "extensions/live-visitors/blocks/waiting-room.liquid"), "utf8").replace(
   /\{% schema %\}[\s\S]*?\{% endschema %\}/,
   "",
 );
@@ -128,7 +128,7 @@ describe("waiting-room embed script", () => {
   });
 
   it("the built asset is the minified source", () => {
-    const built = readFileSync(join(root, "extensions/waiting-room-embed/assets/waiting-room.js"), "utf8");
+    const built = readFileSync(join(root, "extensions/live-visitors/assets/waiting-room.js"), "utf8");
     expect(built).toContain("Hibira Waiting Room for Shopify");
     expect(built.length).toBeLessThan(4000);
   });

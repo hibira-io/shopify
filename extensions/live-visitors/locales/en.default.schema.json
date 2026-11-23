@@ -29,5 +29,15 @@
     "scope_info": "Whole store needs Pro.",
     "scope_product": "People viewing this product",
     "scope_store": "People on the whole store"
+  },
+  "waiting_room": {
+    "name": "Hibira Waiting Room",
+    "info": "Keep this on. It does nothing until you schedule a drop in the Hibira Waiting Room app, then queues shoppers during the drop only."
+  },
+  "live_chat": {
+    "name": "Hibira Live Chat",
+    "color": "Button color (optional)",
+    "info": "Shows the chat button to shoppers. Answer them from the inbox: open the Hibira Live Chat app in your Shopify admin.",
+    "color_info": "Leave empty to use the color set in Hibira Live Chat (Settings → Widget → Appearance)."
   }
 }

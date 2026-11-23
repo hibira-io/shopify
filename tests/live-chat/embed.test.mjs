@@ -9,7 +9,7 @@ import { Liquid } from "liquidjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const source = readFileSync(
-  join(root, "extensions/live-chat-embed/blocks/live-chat.liquid"),
+  join(root, "extensions/live-visitors/blocks/live-chat.liquid"),
   "utf8",
 );
 const block = source.replace(/\{% schema %\}[\s\S]*?\{% endschema %\}/, "");
@@ -87,11 +87,11 @@ describe("live chat embed", () => {
     for (const l of ["en.default", "ja", "zh-TW", "zh-CN", "ko", "th", "vi"]) {
       const loc = JSON.parse(
         readFileSync(
-          join(root, `extensions/live-chat-embed/locales/${l}.schema.json`),
+          join(root, `extensions/live-visitors/locales/${l}.schema.json`),
           "utf8",
         ),
       );
-      expect(Object.keys(loc.embed).sort()).toEqual(["color", "color_info", "info", "name"]);
+      expect(Object.keys(loc.live_chat).sort()).toEqual(["color", "color_info", "info", "name"]);
     }
   });
 });

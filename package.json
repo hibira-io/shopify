@@ -10,7 +10,7 @@
     "test": "vitest run tests/storefront/render.test.mjs tests/waiting-room tests/live-chat",
     "test:e2e": "vitest run tests/storefront/e2e.test.mjs",
     "build:storefront": "esbuild storefront/live-visitors.js --minify --target=es2017 --legal-comments=inline --outfile=extensions/live-visitors/assets/live-visitors.js",
-    "build:waiting-room": "esbuild storefront/waiting-room.js --minify --target=es2017 --legal-comments=inline --outfile=extensions/waiting-room-embed/assets/waiting-room.js"
+    "build:waiting-room": "esbuild storefront/waiting-room.js --minify --target=es2017 --legal-comments=inline --outfile=extensions/live-visitors/assets/waiting-room.js"
   },
   "type": "module",
   "engines": {

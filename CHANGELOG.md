@@ -2,7 +2,7 @@
 
 ## 0.2.0 (unreleased)
 
-- One app: Live Chat and the waiting room are now part of this app (renamed "Hibira: Chat, Visitors & Queue"), instead of two separate apps. Their extensions moved to `extensions/` (`live-chat-embed`, `waiting-room-embed`, `checkout-pass`) and deploy with the app; the app asks for `read_themes` and `write_validations` as well.
+- One app: Live Chat and the waiting room are now part of this app (renamed "Hibira: Chat, Visitors & Queue"), instead of two separate apps. Their app embeds joined the app's one theme app extension (`extensions/live-visitors`, since Shopify allows one per app), the checkout Function moved to `extensions/checkout-pass`, and all deploy with the app; the app asks for `read_themes` and `write_validations` as well.
 - One subscription covers all three: Free, Lite $9.99 (the old Pro), Starter $29, Growth $99 and Business $249 every 30 days, plus the $49 event pass. The backend is hibira-io/pusher-server#933.
 
 ## Hibira Live Chat 0.1.0 (unreleased, `livechat/`)

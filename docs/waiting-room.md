@@ -7,7 +7,7 @@ waiting page and come back to the store when their turn comes. A checkout
 rule makes sure nobody skips the line by going straight to checkout.
 
 This is part of the one Shopify app, Hibira: Chat, Visitors & Queue (the repo
-root): the theme app embed `extensions/waiting-room-embed`, its source
+root): the app embed `extensions/live-visitors/blocks/waiting-room.liquid`, its source
 `storefront/waiting-room.js` and the checkout rule `extensions/checkout-pass`.
 Run the Shopify CLI from the repo root.
 
@@ -36,7 +36,7 @@ storefront page ── no pass ──► https://ws.hibira.io/wait/KEY/ROOM?retu
 checkout ── cart validation Function ── HMAC check of the pass ── block or allow
 ```
 
-- **The embed** (`extensions/waiting-room-embed`, source
+- **The embed** (`extensions/live-visitors/blocks/waiting-room.liquid`, source
   `storefront/waiting-room.js`, ~2 KB) does nothing outside the drop window,
   in the theme editor, or for crawlers. During the drop a shopper without a
   pass goes to the waiting page (whole store, or only product pages tagged
