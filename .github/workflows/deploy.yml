@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && '["ubuntu-latest"]' || vars.USE_AWS_SPOT_RUNNER == 'true' && '["self-hosted","linux","x64","hibira-spot"]' || '["ubuntu-latest"]') }}
     env:
       SHOPIFY_APP_AUTOMATION_TOKEN: ${{ secrets.SHOPIFY_LV_APP_AUTOMATION_TOKEN }}
     steps:

@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   storefront:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && '["ubuntu-latest"]' || vars.USE_AWS_SPOT_RUNNER == 'true' && '["self-hosted","linux","x64","hibira-spot"]' || '["ubuntu-latest"]') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
@@ -25,7 +25,7 @@ jobs:
       - run: npm test
 
   storefront-e2e:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && '["ubuntu-latest"]' || vars.USE_AWS_SPOT_RUNNER == 'true' && '["self-hosted","linux","x64","hibira-spot"]' || '["ubuntu-latest"]') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
@@ -39,7 +39,7 @@ jobs:
 
   # Hibira Waiting Room: the checkout rule (a Rust Shopify Function).
   waiting-room-function:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && '["ubuntu-latest"]' || vars.USE_AWS_SPOT_RUNNER == 'true' && '["self-hosted","linux","x64","hibira-spot"]' || '["ubuntu-latest"]') }}
     defaults:
       run:
         working-directory: waiting-room/extensions/checkout-pass
