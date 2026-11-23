@@ -1,8 +1,0 @@
-{
-  "embed": {
-    "name": "Hibira Live Chat",
-    "color": "Màu nút (không bắt buộc)",
-    "info": "Hiển thị nút trò chuyện cho khách hàng. Trả lời họ từ hộp thư: mở ứng dụng Hibira Live Chat trong trang quản trị Shopify.",
-    "color_info": "Để trống để dùng màu đã đặt trong Hibira Live Chat (Cài đặt → Tiện ích chat → Giao diện)."
-  }
-}

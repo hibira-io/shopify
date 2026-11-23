@@ -92,9 +92,7 @@ run.
 | Path | What |
 |---|---|
 | `shopify.app.toml` | App configuration: URLs on `hibira.io/integrations/shopify`, scopes, webhooks |
-| `extensions/live-visitors/` | Theme app extension: app embed + "Viewing now" block, locales |
-| `extensions/live-chat-embed/` | Theme app extension: the Live Chat button's app embed |
-| `extensions/waiting-room-embed/` | Theme app extension: the waiting room's app embed |
+| `extensions/live-visitors/` | The app's one theme app extension (Shopify allows one per app): the Live Visitors, Live Chat and waiting room app embeds, the "Viewing now" block, locales |
 | `extensions/checkout-pass/` | The waiting room's checkout rule, a Rust Shopify Function |
 | `storefront/` | Sources of the storefront scripts; `npm run build:storefront` and `npm run build:waiting-room` minify them into the extensions |
 | `tests/` | Renders the real Liquid blocks and runs them (Chromium for Live Visitors) |

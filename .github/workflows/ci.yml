@@ -21,7 +21,7 @@ jobs:
       - name: storefront asset is built from storefront/live-visitors.js
         run: npm run build:storefront && git diff --exit-code extensions/live-visitors/assets
       - name: waiting-room asset is built from waiting-room/storefront/waiting-room.js
-        run: npm run build:waiting-room && git diff --exit-code extensions/waiting-room-embed/assets
+        run: npm run build:waiting-room && git diff --exit-code extensions/live-visitors/assets/waiting-room.js
       - run: npm test
 
   storefront-e2e:

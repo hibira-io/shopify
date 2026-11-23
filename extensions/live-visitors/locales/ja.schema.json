@@ -29,5 +29,15 @@
     "scope_info": "ストア全体は Pro が必要です。",
     "scope_product": "この商品を見ている人",
     "scope_store": "ストア全体の人"
+  },
+  "waiting_room": {
+    "name": "Hibira Waiting Room",
+    "info": "オンのままにしてください。Hibira Waiting Room アプリで販売を予約するまで何もせず、販売中だけ買い物客を順番待ちにします。"
+  },
+  "live_chat": {
+    "name": "Hibira Live Chat",
+    "color": "ボタンの色（任意）",
+    "info": "お客様にチャットボタンを表示します。返信は受信箱から：Shopify 管理画面で Hibira Live Chat アプリを開いてください。",
+    "color_info": "空欄にすると Hibira Live Chat で設定した色（設定 → ウィジェット → 外観）を使います。"
   }
 }

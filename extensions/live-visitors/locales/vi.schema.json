@@ -29,5 +29,15 @@
     "scope_info": "Toàn cửa hàng cần gói Pro.",
     "scope_product": "Người đang xem sản phẩm này",
     "scope_store": "Người trên toàn cửa hàng"
+  },
+  "waiting_room": {
+    "name": "Hibira Waiting Room",
+    "info": "Hãy luôn bật. Tính năng này không làm gì cho đến khi bạn lên lịch mở bán trong ứng dụng Hibira Waiting Room, và chỉ xếp hàng khách trong thời gian mở bán."
+  },
+  "live_chat": {
+    "name": "Hibira Live Chat",
+    "color": "Màu nút (không bắt buộc)",
+    "info": "Hiển thị nút trò chuyện cho khách hàng. Trả lời họ từ hộp thư: mở ứng dụng Hibira Live Chat trong trang quản trị Shopify.",
+    "color_info": "Để trống để dùng màu đã đặt trong Hibira Live Chat (Cài đặt → Tiện ích chat → Giao diện)."
   }
 }

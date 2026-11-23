@@ -7,7 +7,7 @@ reply from the inbox, with AI replies, translation and saved answers on paid
 plans.
 
 This is part of the one Shopify app, Hibira: Chat, Visitors & Queue (the repo
-root): the theme app embed `extensions/live-chat-embed`. Run the Shopify CLI
+root): the app embed `extensions/live-visitors/blocks/live-chat.liquid`. Run the Shopify CLI
 from the repo root.
 
 ## How it works
@@ -20,7 +20,7 @@ Shopify admin ── Live Chat page ────────► hibira.io/integr
 storefront page ── app embed ──► https://chat.hibira.io/w/v1.js data-workspace=ws_…
 ```
 
-- **The app embed** (`extensions/live-chat-embed`) is Liquid only: it loads
+- **The app embed** (`extensions/live-visitors/blocks/live-chat.liquid`) is Liquid only: it loads
   the Live Chat widget for the workspace named in `hibira.live_chat`, with
   the shopper's storefront language and the button color the merchant picks.
   It renders nothing until the merchant has opened the app once. The widget

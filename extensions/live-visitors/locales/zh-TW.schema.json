@@ -29,5 +29,15 @@
     "scope_info": "整個商店需要 Pro。",
     "scope_product": "正在看此商品的人",
     "scope_store": "整個商店的人"
+  },
+  "waiting_room": {
+    "name": "Hibira Waiting Room",
+    "info": "請保持開啟。在 Hibira Waiting Room app 排定開賣前不會有任何作用，只在開賣期間讓顧客排隊。"
+  },
+  "live_chat": {
+    "name": "Hibira Live Chat",
+    "color": "按鈕顏色（選填）",
+    "info": "向顧客顯示聊天按鈕。請在 Shopify 後台打開 Hibira Live Chat 應用，從收件匣回覆。",
+    "color_info": "留空即使用 Hibira Live Chat 中設定的顏色（設定 → 聊天視窗 → 外觀）。"
   }
 }
