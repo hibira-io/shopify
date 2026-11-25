@@ -6,7 +6,7 @@
     "deploy": "shopify app deploy",
     "config:link": "shopify app config link",
     "shopify": "shopify",
-    "lint": "eslint --ext .js,.mjs --cache --cache-location ./node_modules/.cache/eslint storefront tests",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint storefront tests",
     "test": "vitest run tests/storefront/render.test.mjs tests/waiting-room tests/live-chat",
     "test:e2e": "vitest run tests/storefront/e2e.test.mjs",
     "build:storefront": "esbuild storefront/live-visitors.js --minify --target=es2017 --legal-comments=inline --outfile=extensions/live-visitors/assets/live-visitors.js",
@@ -17,10 +17,12 @@
     "node": ">=22.12"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@shopify/cli": "^5.0.0",
     "esbuild": "^0.28.2",
-    "eslint": "^8.57.1",
-    "jsdom": "^26.1.0",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0",
+    "jsdom": "^30.1.3",
     "liquidjs": "^10.30.1",
     "prettier": "^3.6.2",
     "pusher": "^5.2.0",
