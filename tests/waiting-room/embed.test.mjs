@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { JSDOM, ResourceLoader } from "jsdom";
+import { JSDOM } from "jsdom";
 import { Liquid } from "liquidjs";
 
 import { NOW, claims, signPass } from "./helpers.mjs";
@@ -40,7 +40,7 @@ function run(html, { url = "https://acme.example/products/tee", cookie = "", ua 
   const dom = new JSDOM(
     `<!doctype html><html><head>${html}</head><body>
       <form action="/cart/add" method="post"><button type="submit">Add</button></form></body></html>`,
-    { url, runScripts: "outside-only", resources: new ResourceLoader({ userAgent: ua }) },
+    { url, runScripts: "outside-only", resources: { userAgent: ua } },
   );
   const w = dom.window;
   if (cookie) w.document.cookie = cookie;
