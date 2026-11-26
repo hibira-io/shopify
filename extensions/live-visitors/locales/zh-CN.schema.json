@@ -32,12 +32,12 @@
   },
   "waiting_room": {
     "name": "Hibira Waiting Room",
-    "info": "请保持开启。在 Hibira Waiting Room 应用中安排开售前不会有任何作用，只在开售期间让顾客排队。"
+    "info": "请保持开启。在 Hibira: Chat, Visitors & Queue 应用的 Waiting room 页面安排开售前不会有任何作用，只在开售期间让顾客排队。"
   },
   "live_chat": {
     "name": "Hibira Live Chat",
     "color": "按钮颜色（可选）",
-    "info": "向顾客显示聊天按钮。请在 Shopify 后台打开 Hibira Live Chat 应用，从收件箱回复。",
+    "info": "向顾客显示聊天按钮。请在 Shopify 后台打开 Hibira: Chat, Visitors & Queue 应用的 Live Chat 页面，从收件箱回复。",
     "color_info": "留空即使用 Hibira Live Chat 中设置的颜色（设置 → 聊天窗口 → 外观）。"
   }
 }
